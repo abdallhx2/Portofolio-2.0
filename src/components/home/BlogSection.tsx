@@ -124,7 +124,7 @@ export function BlogSection({ posts, language, t }: BlogSectionProps) {
                     viewport={sectionViewport}
                     transition={{ duration: 0.5, ease: easings.smooth, delay: 0.1 * (index + 1) }}
                   >
-                    <SideCard post={post} language={language} isRTL={isRTL} formatDate={formatDate} getReadTime={getReadTime} />
+                    <SideCard post={post} language={language} getReadTime={getReadTime} />
                   </motion.div>
                 ))}
               </div>
@@ -270,14 +270,10 @@ function HeroCard({
 function SideCard({
   post,
   language,
-  isRTL,
-  formatDate,
   getReadTime,
 }: {
   post: BlogPost;
   language: string;
-  isRTL: boolean;
-  formatDate: (d: string) => string;
   getReadTime: (p: BlogPost) => string;
 }) {
   return (

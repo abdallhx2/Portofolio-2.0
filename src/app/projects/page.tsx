@@ -9,10 +9,6 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslatedData } from '@/hooks/useTranslatedData';
 import {
-  sectionViewport,
-  staggerContainer,
-  staggerItem,
-  fadeInUp,
   easings,
 } from '@/lib/motion';
 
@@ -20,7 +16,7 @@ type ViewMode = 'grid' | 'list';
 
 export default function ProjectsPage() {
   const { t, isRTL } = useLanguage();
-  const { projects, projectCategories, getProjectsByCategory } = useTranslatedData();
+  const { projectCategories, getProjectsByCategory } = useTranslatedData();
   const [activeCategory, setActiveCategory] = useState(projectCategories[0]);
   const [viewMode, setViewMode] = useState<ViewMode>('grid');
 

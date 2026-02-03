@@ -40,7 +40,8 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
 
-  const authorName = typeof post.author === 'string' ? post.author : post.author.name;
+  const _authorName = typeof post.author === 'string' ? post.author : post.author.name;
+  void _authorName; // Reserved for future use
 
   const relatedPosts = translatedBlogPosts
     .filter(p => (p.id !== post.id && p.slug !== post.slug) && p.category === post.category)
