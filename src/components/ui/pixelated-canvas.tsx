@@ -515,13 +515,15 @@ export const PixelatedCanvas: React.FC<PixelatedCanvasProps> = ({
       return () => {
         isCancelled = true;
         window.removeEventListener("resize", onResize);
-        if ((img as HTMLImageElement & { _cleanup?: () => void })._cleanup) (img as HTMLImageElement & { _cleanup?: () => void })._cleanup();
+        const cleanup = (img as HTMLImageElement & { _cleanup?: () => void })._cleanup;
+        if (cleanup) cleanup();
       };
     }
 
     return () => {
       isCancelled = true;
-      if ((img as HTMLImageElement & { _cleanup?: () => void })._cleanup) (img as HTMLImageElement & { _cleanup?: () => void })._cleanup();
+      const cleanup = (img as HTMLImageElement & { _cleanup?: () => void })._cleanup;
+      if (cleanup) cleanup();
     };
   }, [
     src,
