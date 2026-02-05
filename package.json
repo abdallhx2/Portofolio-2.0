@@ -22,7 +22,7 @@
     "dotted-map": "^2.2.3",
     "lucide-react": "^0.525.0",
     "motion": "^12.29.2",
-    "next": "15.3.5",
+    "next": "^15.3.9",
     "postprocessing": "^6.38.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
