@@ -1,508 +1,409 @@
-# Portfolio Website | موقع شخصي
+# Portfolio 2.0 | البورتفوليو 2.0
 
-[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
-[![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)](https://reactjs.org/)
+<div align="center">
 
-## 🚀 About This Project | نبذة عن المشروع
+![Portfolio 2.0](https://img.shields.io/badge/Portfolio-2.0-000?style=for-the-badge&logo=vercel&logoColor=white)
+[![Next.js](https://img.shields.io/badge/Next.js-15.3-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![Motion](https://img.shields.io/badge/Motion-React-ff69b4?style=for-the-badge)](https://motion.dev/)
 
-A cutting-edge, fully responsive portfolio website that showcases modern web development practices. Built with the latest technologies including Next.js 15 and React 19, this project demonstrates advanced features like bilingual support, dynamic theming, and smooth animations. Perfect for developers, designers, and professionals who want to create an impressive online presence.
+**A modern, immersive portfolio experience built with cutting-edge web technologies**
 
-موقع شخصي متطور ومتجاوب بالكامل يعرض ممارسات تطوير الويب الحديثة. مبني بأحدث التقنيات بما في ذلك Next.js 15 و React 19، يُظهر هذا المشروع ميزات متقدمة مثل الدعم ثنائي اللغة، والتصميم الديناميكي، والحركات السلسة. مثالي للمطورين والمصممين والمهنيين الذين يريدون إنشاء حضور مُبهر على الإنترنت.
+**تجربة بورتفوليو عصرية وغامرة مبنية بأحدث تقنيات الويب**
 
-## 🌟 Live Demo | المعاينة المباشرة
+[Live Demo](https://an1.space) · [Report Bug](https://github.com/abdallhx2/portfolio-website/issues) · [Request Feature](https://github.com/abdallhx2/portfolio-website/issues)
 
-Experience the portfolio live and see all features in action:
-جرب الموقع الشخصي مباشرة وشاهد جميع الميزات في العمل:
+</div>
 
-### **🔗 Demo Links | روابط التجربة**
+---
 
-| Version | Link | Description |
-|---------|------|-------------|
-| 🌐 **Live Website** | [Visit Portfolio](https://abdallhx2-portfolio.vercel.app) | Full production version |
-| 📱 **Mobile Preview** | [Mobile View](https://abdallhx2-portfolio.vercel.app) | Optimized for mobile devices |
-| 🔍 **GitHub Repository** | [Source Code](https://github.com/abdallhx2/portfolio-website) | View and clone the source |
+## Overview | نظرة عامة
 
-### **✨ What to Try | ما يمكن تجربته**
+Portfolio 2.0 is a complete rebuild of my personal portfolio, designed from the ground up to deliver an exceptional browsing experience that reflects the quality of work I deliver. The project originated from a genuine need to showcase projects, skills, and experience in a way that's both visually stunning and technically impressive — a portfolio that practices what it preaches.
 
-- 🌐 **Language Switching** - Toggle between Arabic and English
-- 🎨 **Theme Changes** - Try different color schemes and dark/light modes  
-- 📱 **Responsive Design** - Test on different screen sizes
-- ⚡ **Performance** - Notice the fast loading and smooth animations
-- 🧭 **Navigation** - Explore all sections and pages
+البورتفوليو 2.0 هو إعادة بناء كاملة لموقعي الشخصي، مصمم من الأساس لتقديم تجربة تصفح استثنائية تعكس جودة العمل الذي أقدمه. نشأ المشروع من حاجة حقيقية لعرض المشاريع والمهارات والخبرات بطريقة مبهرة بصرياً ومثيرة للإعجاب تقنياً — بورتفوليو يطبق ما يعرضه.
 
-> **Note | ملاحظة:** If the demo link above doesn't work, the site might be deployed to a different URL. Check the repository for the latest deployment link.
-> إذا لم يعمل رابط التجربة أعلاه، فقد يكون الموقع منشوراً على رابط مختلف. تحقق من المستودع للحصول على أحدث رابط للنشر.
+---
 
-## ✨ Key Features | المميزات الرئيسية
+## What's New in 2.0 | الجديد في الإصدار 2.0
 
-### 🌍 **Bilingual Experience | تجربة ثنائية اللغة**
-- **Arabic (RTL)** - دعم كامل للغة العربية مع اتجاه النص من اليمين لليسار
-- **English (LTR)** - Full English support with left-to-right text direction  
-- **Real-time switching** - تبديل فوري بين اللغات بدون إعادة تحميل الصفحة
-- **Cultural adaptation** - تكيف ثقافي كامل للمحتوى والتصميم
+### Motion-Powered Animations | أنيميشن مدعوم بـ Motion
 
-### 🎨 **Advanced Theme System | نظام المظاهر المتقدم**
-- **Dark/Light Mode** - نظام المظهر الداكن والفاتح مع كشف تفضيلات النظام
-- **5 Color Schemes** - 5 أنظمة ألوان مختلفة (Blue, Purple, Green, Orange, Pink)
-- **Instant switching** - تبديل فوري مع انتقالات سلسة
-- **Smart preferences** - حفظ التفضيلات المخصصة
+The entire UI is orchestrated with **Motion for React** (formerly Framer Motion), delivering:
 
-### 📱 **Responsive & Modern Design | تصميم متجاوب وحديث**
-- **Mobile-first approach** - نهج الهاتف المحمول أولاً
-- **All screen sizes** - محسن لجميع أحجام الشاشات
-- **Touch-friendly** - تفاعلات ودودة للمس
-- **Accessibility** - إمكانية الوصول ومعايير WCAG
+- **Scroll-triggered reveals** — Content elegantly fades and slides into view as you scroll
+- **Staggered animations** — Elements animate in sequence for a polished, intentional feel
+- **Smooth page transitions** — Seamless navigation between sections and pages
+- **Interactive hover states** — Micro-interactions that respond to user engagement
+- **Hardware-accelerated performance** — Buttery smooth 60fps animations
 
-### ⚡ **High Performance | أداء عالي**
-- **Next.js 15** - أحدث إصدار مع App Router للأداء الفائق
-- **Server-side rendering (SSR)** - عرض من جانب الخادم
-- **Static site generation (SSG)** - توليد مواقع ثابتة
-- **Optimized images** - صور محسنة وتحميل ذكي
-- **Fast loading** - تحميل سريع وانتقالات سلسة
+الواجهة بالكامل منسّقة باستخدام **Motion for React**، تقدم:
+- **ظهور محفّز بالتمرير** — المحتوى يظهر بسلاسة أثناء التمرير
+- **أنيميشن متتابع** — العناصر تظهر بالتتابع لإحساس مصقول ومقصود
+- **انتقالات سلسة بين الصفحات** — تنقل سلس بين الأقسام والصفحات
+- **حالات تفاعلية عند التمرير** — تفاعلات دقيقة تستجيب لتفاعل المستخدم
+- **أداء مُسرّع بالعتاد** — أنيميشن ناعم بـ 60 إطار في الثانية
 
-### 🎭 **Beautiful Animations | حركات جميلة**
-- **Custom animations** - حركات مخصصة مع CSS و React
-- **Staggered effects** - تأثيرات متدرجة للعناصر
-- **Scroll-triggered** - حركات مُحفزة بالتمرير
-- **Hardware acceleration** - تسارع الأجهزة للأداء الأمثل
+### Modern Design System | نظام تصميم عصري
 
-## 🛠️ Technology Stack | التقنيات المستخدمة
+A cohesive visual language built with CSS custom properties:
 
-### **Core Technologies | التقنيات الأساسية**
+- **Glass morphism effects** — Frosted glass overlays with backdrop blur
+- **Dynamic theming** — Dark/Light modes with 5 accent color schemes
+- **Fluid typography** — Responsive text that scales beautifully across devices
+- **Consistent spacing** — Unified padding and margins using CSS variables
+- **RTL-first approach** — Native Arabic support with full RTL layout adaptation
 
-- **[Next.js 15](https://nextjs.org/)** - React framework with App Router for optimal performance and SEO
-  - إطار عمل React مع App Router للأداء الأمثل وتحسين محركات البحث
-- **[TypeScript 5](https://www.typescriptlang.org/)** - Type-safe JavaScript for better development experience
-  - JavaScript آمن النوع لتجربة تطوير أفضل
-- **[React 19](https://reactjs.org/)** - Latest React with improved performance and new features
-  - أحدث إصدار من React مع أداء محسن وميزات جديدة
-- **[Tailwind CSS 4](https://tailwindcss.com/)** - Utility-first CSS framework for rapid UI development
-  - إطار عمل CSS للتطوير السريع للواجهات
+لغة بصرية متماسكة مبنية بمتغيرات CSS:
+- **تأثيرات الزجاج المصقول** — طبقات زجاجية ضبابية
+- **ثيمات ديناميكية** — الوضع الداكن والفاتح مع 5 أنظمة ألوان
+- **خطوط مرنة** — نص متجاوب يتكيف بجمال عبر الأجهزة
+- **تباعد متسق** — حشو وهوامش موحدة باستخدام متغيرات CSS
+- **نهج RTL أولاً** — دعم عربي أصيل مع تكيف كامل للتخطيط
 
-### **Additional Tools | أدوات إضافية**
+### Enhanced Content Architecture | بنية محتوى محسّنة
 
-- **[Lucide React](https://lucide.dev/)** - Beautiful, customizable SVG icons
-  - أيقونات SVG جميلة وقابلة للتخصيص
-- **[React Markdown](https://github.com/remarkjs/react-markdown)** - Markdown rendering with syntax highlighting
-  - عرض Markdown مع تسليط الضوء على الصيغة
-- **Next.js Image** - Optimized image component with automatic format detection
-  - مكون صورة محسن مع اكتشاف التنسيق التلقائي
-- **CSS Transitions** - Hardware-accelerated animations and transitions
-  - حركات وانتقالات مُسرَّعة بالأجهزة
+- **12 Projects** — Comprehensive showcase with bilingual descriptions
+- **Blog system** — Markdown-powered articles with syntax highlighting
+- **Services bento grid** — Visual service offerings with hover effects
+- **Dynamic filtering** — Category-based project and blog filtering
+- **Unified templates** — Consistent layouts across all detail pages
 
-### **Development Tools | أدوات التطوير**
+- **12 مشروع** — عرض شامل بوصف ثنائي اللغة
+- **نظام مدونة** — مقالات Markdown مع تلوين الكود
+- **شبكة خدمات bento** — عرض خدمات بصري مع تأثيرات hover
+- **تصفية ديناميكية** — تصفية المشاريع والمقالات حسب التصنيف
+- **قوالب موحدة** — تخطيطات متسقة عبر جميع صفحات التفاصيل
 
-- **ESLint** - Code quality and consistency checking
-- **PostCSS** - CSS transformation and optimization
-- **Vercel** - Deployment and hosting platform
+---
 
-## 🚀 Getting Started | البدء السريع
+## Tech Stack | التقنيات المستخدمة
 
-### **Prerequisites | المتطلبات الأساسية**
+### Core Framework | الإطار الأساسي
 
-Before you begin, ensure you have the following installed:
-تأكد من تثبيت المتطلبات التالية قبل البدء:
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| **Next.js** | 15.3 | App Router, SSR, SSG, API routes |
+| **React** | 19 | UI components with latest features |
+| **TypeScript** | 5 | Type-safe development |
+| **Tailwind CSS** | 4 | Utility-first styling with CSS variables |
 
-- **Node.js 18+** - [Download here | تحميل من هنا](https://nodejs.org/)
-- **Package Manager** - npm (included with Node.js), yarn, or pnpm
-- **Git** - For cloning the repository | لنسخ المستودع
+### Animation & Interactivity | الأنيميشن والتفاعل
 
-### **Quick Installation | التثبيت السريع**
+| Library | Purpose |
+|---------|---------|
+| **Motion** (motion/react) | Scroll animations, page transitions, gestures |
+| **CSS Transitions** | Micro-interactions, hover states |
+| **Intersection Observer** | Viewport-triggered animations |
 
-Follow these simple steps to get your portfolio running locally:
-اتبع هذه الخطوات البسيطة لتشغيل الموقع محلياً:
+### UI Components | مكونات الواجهة
 
-#### **1. Clone the Repository | نسخ المستودع**
-```bash
-git clone https://github.com/abdallhx2/portfolio-website.git
-cd portfolio-website
+| Library | Purpose |
+|---------|---------|
+| **Radix UI** | Accessible primitives (Dialog, Dropdown, Tabs) |
+| **Lucide React** | Icon system with 1000+ icons |
+| **React Markdown** | Blog content rendering with remark/rehype |
+| **next-themes** | Dark/Light mode with system detection |
+
+### Development & Build | التطوير والبناء
+
+| Tool | Purpose |
+|------|---------|
+| **Turbopack** | Fast development builds |
+| **ESLint** | Code quality and consistency |
+| **PostCSS** | CSS processing and optimization |
+| **Vercel** | Deployment and edge functions |
+
+---
+
+## Features | المميزات
+
+### Bilingual Experience | تجربة ثنائية اللغة
+
+- **Arabic (RTL)** — Full right-to-left layout with cultural adaptation
+- **English (LTR)** — Complete English content and navigation
+- **Instant switching** — Real-time language toggle without page reload
+- **Translated data** — All projects, blog posts, and UI elements in both languages
+
+### Motion-Driven UI | واجهة مدفوعة بالحركة
+
+```tsx
+// Scroll-triggered section reveal
+<motion.section
+  initial={{ opacity: 0, y: 60 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-100px" }}
+  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+>
+  {/* Content */}
+</motion.section>
+
+// Staggered list animation
+<motion.div variants={staggerContainer()}>
+  {items.map((item, i) => (
+    <motion.div key={i} variants={staggerItem}>
+      {item}
+    </motion.div>
+  ))}
+</motion.div>
 ```
 
-#### **2. Install Dependencies | تثبيت التبعيات**
-Choose your preferred package manager:
-اختر مدير الحزم المفضل لديك:
+### Responsive Design | تصميم متجاوب
 
-```bash
-# Using npm
-npm install
+- **Mobile-first** — Optimized for touch devices
+- **Breakpoints** — sm (640px), md (768px), lg (1024px), xl (1280px), 2xl (1536px)
+- **Fluid layouts** — CSS clamp() for seamless scaling
+- **Container variants** — `container-unified` (1600px), `max-w-5xl` (1024px) for content
 
-# Using yarn
-yarn install
+### Performance Optimized | أداء محسّن
 
-# Using pnpm (recommended for faster installation)
-pnpm install
-```
+- **Next.js Image** — Automatic WebP/AVIF conversion, lazy loading
+- **Code splitting** — Dynamic imports for non-critical components
+- **Font optimization** — Local fonts with `next/font`
+- **Edge caching** — Static pages served from CDN edge nodes
 
-#### **3. Start Development Server | تشغيل خادم التطوير**
-```bash
-# Using npm
-npm run dev
+---
 
-# Using yarn
-yarn dev
-
-# Using pnpm
-pnpm dev
-```
-
-#### **4. View Your Portfolio | عرض الموقع**
-Open your browser and navigate to:
-افتح المتصفح وانتقل إلى:
-
-```
-http://localhost:3000
-```
-
-🎉 **Success!** Your portfolio is now running locally.
-🎉 **نجح!** موقعك الشخصي يعمل الآن محلياً.
-
-## 📁 Project Structure | هيكل المشروع
-
-Here's an overview of the main directories and their purposes:
-إليك نظرة عامة على الأدلة الرئيسية ووظائفها:
+## Project Structure | هيكل المشروع
 
 ```
 src/
-├── 📄 app/                     # Next.js App Router - Main application pages
-│   ├── page.tsx               # 🏠 Home page - الصفحة الرئيسية
-│   ├── about/                 # 👤 About page - صفحة نبذة شخصية
-│   ├── blog/                  # 📝 Blog pages - صفحات المدونة
-│   ├── contact/               # 📧 Contact page - صفحة التواصل
-│   ├── projects/              # 💼 Projects showcase - عرض المشاريع
-│   ├── services/              # 🛠️ Services page - صفحة الخدمات
-│   └── shop/                  # 🛒 Shop page - صفحة المتجر
+├── app/                          # Next.js App Router
+│   ├── page.tsx                  # Home page with hero, services, projects
+│   ├── about/                    # About page with sticky scroll reveal
+│   ├── blog/                     # Blog listing and [slug] detail pages
+│   ├── projects/                 # Projects listing and [slug] detail pages
+│   ├── services/                 # Services page with bento grid
+│   ├── contact/                  # Contact form page
+│   └── layout.tsx                # Root layout with providers
 │
-├── 🧩 components/             # Reusable UI Components - مكونات واجهة المستخدم
-│   ├── Animations.tsx         # ✨ Animation components - مكونات الحركة
-│   ├── ThemeToggle.tsx       # 🎨 Theme switcher - مبدل المظاهر
-│   ├── Footer.tsx            # 🔻 Footer component - مكون التذييل
-│   ├── Sidebar.tsx           # 📱 Navigation sidebar - شريط التنقل الجانبي
-│   └── ...                   # Additional components - مكونات إضافية
+├── components/
+│   ├── home/                     # Home page sections
+│   │   ├── HeroSection.tsx       # Animated hero with typing effect
+│   │   ├── AboutSummaryV2.tsx    # About preview with image/content split
+│   │   ├── ServicesBento.tsx     # Bento grid services showcase
+│   │   └── ProjectsShowcase.tsx  # Featured projects carousel
+│   │
+│   ├── ui/                       # Reusable UI primitives
+│   │   ├── sticky-scroll-reveal  # Sticky scroll animation component
+│   │   ├── animated-card.tsx     # Motion-powered card with hover
+│   │   └── theme-toggle.tsx      # Dark/Light mode switcher
+│   │
+│   ├── shared/                   # Shared components
+│   │   ├── Navbar.tsx            # Fixed navigation with language toggle
+│   │   ├── Footer.tsx            # Site footer with links
+│   │   └── Sidebar.tsx           # Mobile navigation drawer
+│   │
+│   └── providers/                # Context providers
+│       └── theme-provider.tsx    # Theme and color scheme context
 │
-├── 🔄 context/                # React Context Providers - موفرات السياق
-│   ├── LanguageContext.tsx    # 🌐 Language management - إدارة اللغات
-│   ├── ThemeContext.tsx       # 🎨 Theme management - إدارة المظاهر
-│   └── SidebarContext.tsx     # 📱 Sidebar state - حالة الشريط الجانبي
+├── data/                         # Static data and translations
+│   ├── projects-translations.ts  # Project data (EN/AR)
+│   ├── blog-translations.ts      # Blog posts (EN/AR)
+│   ├── me-translations.ts        # Personal info (EN/AR)
+│   └── services-translations.ts  # Services data (EN/AR)
 │
-├── 📊 data/                   # Static Data & Content - البيانات والمحتوى الثابت
-│   ├── me.ts                 # 👤 Personal information - المعلومات الشخصية
-│   ├── projects.ts           # 💼 Projects data - بيانات المشاريع
-│   ├── blog.ts               # 📝 Blog posts data - بيانات المقالات
-│   └── colors.ts             # 🎨 Color schemes - أنظمة الألوان
+├── lib/                          # Utility libraries
+│   └── motion.ts                 # Motion presets and variants
 │
-├── 🎣 hooks/                  # Custom React Hooks - خطافات React مخصصة
-│   ├── useTranslatedData.ts   # 🌐 Translation hook - خطاف الترجمة
-│   └── useColorScheme.ts      # 🎨 Color scheme hook - خطاف نظام الألوان
+├── translations/                 # i18n system
+│   └── index.ts                  # Translation keys and hooks
 │
-├── 🌐 translations/           # Translation Files - ملفات الترجمة
-│   └── index.ts              # 🗣️ Language translations - ترجمات اللغات
-│
-└── 🔧 utils/                  # Utility Functions - دوال المساعدة
-    └── colorUtils.ts          # 🎨 Color utilities - أدوات الألوان
+└── hooks/                        # Custom React hooks
+    ├── useLanguage.ts            # Language context hook
+    └── useTranslatedData.ts      # Translated content hook
 
-public/                        # Static Assets - الأصول الثابتة
-├── 👤 me/                     # Personal images - الصور الشخصية
-├── 💼 project/                # Project screenshots - لقطات المشاريع
-├── 🗺️ roadmap/                # Roadmap icons - أيقونات خارطة الطريق
-└── 🛠️ services/               # Service icons - أيقونات الخدمات
+public/
+├── me/                           # Personal photos
+├── project/                      # Project screenshots
+│   ├── labeeb/                   # Labib AI project images
+│   ├── lura/                     # ALOURA agency images
+│   └── ...                       # Other project folders
+└── services/                     # Service icons
 ```
 
-### **Key Directories Explained | شرح الأدلة الرئيسية**
+---
 
-- **`src/app/`** - Contains all pages using Next.js App Router
-  - يحتوي على جميع الصفحات باستخدام App Router
-- **`src/components/`** - Reusable UI components for consistent design
-  - مكونات واجهة المستخدم القابلة لإعادة الاستخدام
-- **`src/data/`** - All content and configuration data
-  - جميع بيانات المحتوى والتكوين
-- **`public/`** - Static files served directly by the web server
-  - الملفات الثابتة التي يخدمها الخادم مباشرة
+## Getting Started | البدء السريع
 
-## 🎨 Customization Guide | دليل التخصيص
+### Prerequisites | المتطلبات
 
-Make this portfolio truly yours! Here's how to customize every aspect:
-اجعل هذا الموقع الشخصي ملكك حقاً! إليك كيفية تخصيص كل جانب:
+- **Node.js 20+** — [Download](https://nodejs.org/)
+- **pnpm** (recommended) — `npm install -g pnpm`
 
-### **⚡ Quick Setup | الإعداد السريع**
-
-#### **1. 👤 Personal Information | المعلومات الشخصية**
-Update your personal details in the data files:
-حدث معلوماتك الشخصية في ملفات البيانات:
-
-```typescript
-// src/data/me.ts and src/data/me-translations.ts
-// Edit: Name, title, bio, contact info, social links
-// حرر: الاسم، المسمى الوظيفي، النبذة، معلومات التواصل، الروابط الاجتماعية
-```
-
-#### **2. 💼 Projects Portfolio | معرض المشاريع**
-Add your amazing projects:
-أضف مشاريعك المذهلة:
-
-```typescript
-// src/data/projects.ts and src/data/projects-translations.ts
-// Add: Project descriptions, images, technologies, links
-// أضف: أوصاف المشاريع، الصور، التقنيات، الروابط
-```
-
-#### **3. 📝 Blog Content | محتوى المدونة**
-Share your thoughts and expertise:
-شارك أفكارك وخبراتك:
-
-```typescript
-// src/data/blog.ts and src/data/blog-translations.ts
-// Add: Blog posts, articles, tutorials
-// أضف: منشورات المدونة، المقالات، الدروس التعليمية
-```
-
-#### **4. 🖼️ Images & Assets | الصور والأصول**
-Replace with your own images:
-استبدل بصورك الخاصة:
-
-- `public/me/` - Personal photos | الصور الشخصية
-- `public/project/` - Project screenshots | لقطات المشاريع  
-- `public/services/` - Service icons | أيقونات الخدمات
-
-### **🌐 Advanced Customization | التخصيص المتقدم**
-
-#### **Adding New Languages | إضافة لغات جديدة**
-1. Update `src/translations/index.ts` with new language translations
-2. Add language data to relevant files in `src/data/`
-3. Update the language switcher component
-
-#### **Creating Custom Themes | إنشاء مظاهر مخصصة**
-1. Edit `src/data/colors.ts` to add new color schemes
-2. Update CSS variables in `src/app/globals.css`
-3. Test across all components for consistency
-
-#### **Adding New Sections | إضافة أقسام جديدة**
-1. Create new components in `src/components/`
-2. Add translations in `src/translations/`
-3. Import and use in relevant pages
-4. Update navigation and routing as needed
-
-## 📚 Available Scripts | الأوامر المتاحة
-
-Here are the main commands you can use during development:
-إليك الأوامر الرئيسية التي يمكنك استخدامها أثناء التطوير:
-
-| Command | Description | الوصف |
-|---------|-------------|--------|
-| `npm run dev` | Start development server with hot reload | تشغيل خادم التطوير مع إعادة التحميل الفوري |
-| `npm run build` | Build production-ready application | بناء التطبيق للإنتاج |
-| `npm run start` | Start production server (after build) | تشغيل خادم الإنتاج (بعد البناء) |
-| `npm run lint` | Run ESLint for code quality check | تشغيل ESLint لفحص جودة الكود |
-
-### **🔧 Development Commands | أوامر التطوير**
+### Installation | التثبيت
 
 ```bash
-# Start development with Turbopack (faster)
-npm run dev
+# Clone the repository
+git clone https://github.com/abdallhx2/portfolio-website.git
+cd portfolio-website
 
-# Build for production
-npm run build
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm dev
+
+# Open in browser
+open http://localhost:3000
+```
+
+### Build for Production | البناء للإنتاج
+
+```bash
+# Build optimized production bundle
+pnpm build
 
 # Start production server
-npm run start
+pnpm start
 
-# Check code quality
-npm run lint
-
-# Fix linting issues automatically
-npm run lint -- --fix
+# Or deploy to Vercel
+vercel deploy --prod
 ```
 
-## 🌐 Deployment | النشر
+---
 
-Deploy your portfolio to share it with the world! Here are the recommended methods:
-انشر موقعك الشخصي لمشاركته مع العالم! إليك الطرق الموصى بها:
+## Customization | التخصيص
 
-### **🚀 Vercel (Recommended | الموصى به)**
+### Personal Information
 
-Vercel is the easiest and fastest way to deploy Next.js applications:
-Vercel هو أسهل وأسرع طريقة لنشر تطبيقات Next.js:
+Edit `src/data/me-translations.ts`:
 
-#### **Method 1: GitHub Integration | التكامل مع GitHub**
-1. **Push to GitHub** - Push your code to a GitHub repository
-   ```bash
-   git add .
-   git commit -m "Deploy portfolio"
-   git push origin main
-   ```
-
-2. **Connect to Vercel** - Go to [vercel.com](https://vercel.com) and sign in with GitHub
-   - انتقل إلى vercel.com وسجل الدخول باستخدام GitHub
-
-3. **Import Project** - Click "New Project" and import your repository
-   - انقر على "مشروع جديد" واستورد مستودعك
-
-4. **Deploy** - Vercel will automatically detect Next.js and deploy
-   - سيقوم Vercel بالكشف عن Next.js والنشر تلقائياً
-
-#### **Method 2: Vercel CLI | واجهة سطر الأوامر**
-```bash
-# Install Vercel CLI
-npm install -g vercel
-
-# Deploy from your project directory
-vercel
-
-# Follow the prompts for configuration
-```
-
-### **🔧 Manual Deployment | النشر اليدوي**
-
-For other hosting providers:
-لمزودي الاستضافة الآخرين:
-
-#### **1. Build the Project | بناء المشروع**
-```bash
-npm run build
-```
-
-#### **2. Static Export (Optional) | التصدير الثابت (اختياري)**
-For static hosting like GitHub Pages:
-للاستضافة الثابتة مثل GitHub Pages:
-
-Add to `next.config.js`:
-أضف إلى `next.config.js`:
-```javascript
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  output: 'export',
-  images: {
-    unoptimized: true
+```typescript
+export const personalInfoTranslations = {
+  en: {
+    name: "Your Name",
+    title: "Your Title",
+    bio: "Your bio...",
+    // ...
+  },
+  ar: {
+    name: "اسمك",
+    title: "مسماك الوظيفي",
+    bio: "نبذة عنك...",
+    // ...
   }
+};
+```
+
+### Projects
+
+Edit `src/data/projects-translations.ts`:
+
+```typescript
+{
+  id: "project-slug",
+  title: "Project Title",
+  description: "Full description...",
+  shortDescription: "Brief summary",
+  category: "Web Development",
+  tags: ["Next.js", "TypeScript"],
+  image: "/project/folder/1.jpg",
+  gallery: ["/project/folder/1.jpg", "/project/folder/2.jpg"],
+  client: "Client Name",
+  duration: "2 months",
+  year: 2025,
+  url: "https://project-url.com",
+  github: "https://github.com/...",
+  featured: true,
+  challenge: "The problem solved",
+  solution: "How you solved it",
+  result: "The outcome achieved",
+  technologies: ["Next.js", "TypeScript", "Tailwind CSS"]
 }
-
-module.exports = nextConfig
 ```
 
-Then run:
-ثم قم بتشغيل:
+### Motion Presets
+
+Edit `src/lib/motion.ts`:
+
+```typescript
+// Customize animation presets
+export const sectionViewport = {
+  once: true,
+  margin: "-100px"
+};
+
+export const easings = {
+  decelerate: [0.22, 1, 0.36, 1],
+  spring: [0.43, 0.13, 0.23, 0.96]
+};
+
+export const staggerContainer = (stagger = 0.1) => ({
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: stagger }
+  }
+});
+```
+
+---
+
+## Deployment | النشر
+
+### Vercel (Recommended)
+
+1. Push to GitHub
+2. Import project at [vercel.com](https://vercel.com)
+3. Deploy — automatic builds on every push
+
+### Environment Variables
+
 ```bash
-npm run build
+# Optional: Analytics
+NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+
+# Optional: Contact form
+RESEND_API_KEY=re_xxxxx
 ```
 
-#### **3. Deploy Built Files | نشر الملفات المبنية**
-- **For SSR:** Deploy the entire project with Node.js support
-- **For Static:** Deploy the `out` folder (if using static export)
+---
 
-### **🌟 Other Deployment Options | خيارات النشر الأخرى**
+## Browser Support | دعم المتصفحات
 
-- **[Netlify](https://netlify.com)** - Excellent for static sites with form handling
-- **[Railway](https://railway.app)** - Great for full-stack applications  
-- **[DigitalOcean](https://digitalocean.com)** - For custom server configurations
-- **[AWS Amplify](https://aws.amazon.com/amplify/)** - AWS-based hosting solution
+| Browser | Version | Status |
+|---------|---------|--------|
+| Chrome | 100+ | ✅ Full support |
+| Firefox | 100+ | ✅ Full support |
+| Safari | 15+ | ✅ Full support |
+| Edge | 100+ | ✅ Full support |
+| Mobile Safari | iOS 15+ | ✅ Optimized |
+| Chrome Android | Latest | ✅ Optimized |
 
-### **⚙️ Environment Variables | متغيرات البيئة**
+---
 
-If you use environment variables, make sure to configure them in your deployment platform:
-إذا كنت تستخدم متغيرات البيئة، تأكد من تكوينها في منصة النشر:
+## License | الرخصة
 
-```bash
-# Example environment variables
-NEXT_PUBLIC_SITE_URL=https://yourportfolio.com
-NEXT_PUBLIC_ANALYTICS_ID=your-analytics-id
-```
+This project is open source under the [MIT License](LICENSE).
 
-## 📱 Browser Support | دعم المتصفحات
+- ✅ Use for personal and commercial projects
+- ✅ Modify and customize freely
+- ✅ Share and distribute
+- ⭐ Star the repo if you find it helpful!
 
-This portfolio is tested and optimized for modern browsers:
-تم اختبار وتحسين هذا الموقع الشخصي للمتصفحات الحديثة:
+---
 
-| Browser | Version | Status | الحالة |
-|---------|---------|--------|---------|
-| 🌐 **Chrome** | 80+ | ✅ Fully Supported | مدعوم بالكامل |
-| 🦊 **Firefox** | 80+ | ✅ Fully Supported | مدعوم بالكامل |
-| 🧭 **Safari** | 14+ | ✅ Fully Supported | مدعوم بالكامل |
-| 🔷 **Edge** | 80+ | ✅ Fully Supported | مدعوم بالكامل |
-| 📱 **Mobile Browsers** | Latest | ✅ Optimized | محسن |
+## Contact | التواصل
 
-### **🔧 Compatibility Features | ميزات التوافق**
+**Abdullah Alhasani | عبدالله الحسني**
 
-- **Progressive Enhancement** - Works on older browsers with graceful degradation
-- **Responsive Design** - Adapts to all screen sizes and orientations  
-- **Touch Support** - Optimized for touch devices and mobile interaction
-- **Accessibility** - Meets WCAG guidelines for inclusive design
-
-> **Note:** While the site works on older browsers, the best experience is on modern browsers that support CSS Grid, Flexbox, and ES6+ features.
-> ملاحظة: رغم أن الموقع يعمل على المتصفحات الأقدم، التجربة الأفضل تكون على المتصفحات الحديثة التي تدعم CSS Grid و Flexbox وميزات ES6+.
-
-## 📄 License | الرخصة
-
-This project is open source and available under the [MIT License](LICENSE).
-
-هذا المشروع مفتوح المصدر ومتاح تحت [رخصة MIT](LICENSE).
-
-### **⚖️ What this means | ماذا يعني هذا**
-
-- ✅ **Free to use** - Use for personal and commercial projects | استخدم للمشاريع الشخصية والتجارية
-- ✅ **Modify freely** - Customize as needed | عدّل حسب الحاجة  
-- ✅ **Share and distribute** - Share with others | شارك مع الآخرين
-- ✅ **No warranty** - Use at your own risk | بدون ضمان - الاستخدام على مسؤوليتك
-
-> Please consider starring ⭐ the repository if you use this project!
-> يرجى النظر في وضع نجمة ⭐ للمستودع إذا استخدمت هذا المشروع!
-
-## 📞 Contact & Support | التواصل والدعم
-
-### **👨‍💻 About the Developer | نبذة عن المطور**
-
-**Abdullah Alhasani | عبدالله الحسني**  
-Full-Stack Developer & UI/UX Designer  
-مطور متكامل ومصمم واجهات المستخدم
-
-### **🌐 Get in Touch | التواصل**
-
-I'm always open to discussing new opportunities, collaborations, or just having a chat about technology!
-أنا منفتح دائماً لمناقشة الفرص الجديدة والتعاون أو مجرد محادثة حول التكنولوجيا!
-
-| Platform | Link | Description |
-|----------|------|-------------|
-| 🐙 **GitHub** | [@abdallhx2](https://github.com/abdallhx2) | Code repositories & Open source projects |
-| 🐦 **Twitter** | [@01DMXX](https://twitter.com/01DMXX) | Tech updates & Quick thoughts |
-| 📧 **Email** | [Contact via GitHub](https://github.com/abdallhx2) | Professional inquiries |
-| 📍 **Location** | Riyadh, Saudi Arabia | الرياض، المملكة العربية السعودية |
-
-### **💼 Professional Services | الخدمات المهنية**
-
-- **Web Development** - تطوير المواقع الإلكترونية
-- **UI/UX Design** - تصميم واجهات المستخدم
-- **Consulting** - الاستشارات التقنية
-- **Code Review** - مراجعة الكود
-
-### **🤝 Open Source Contributions | المساهمات مفتوحة المصدر**
-
-This project is open source and contributions are welcome!
-هذا المشروع مفتوح المصدر والمساهمات مرحب بها!
-
-**How to contribute | كيفية المساهمة:**
-1. 🍴 Fork the repository
-2. 🌿 Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. 💾 Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. 📤 Push to the branch (`git push origin feature/amazing-feature`)
-5. 🔄 Open a Pull Request
-
-### **🆘 Getting Help | الحصول على المساعدة**
-
-- **Issues** - Report bugs or request features on [GitHub Issues](https://github.com/abdallhx2/portfolio-website/issues)
-- **Discussions** - Join community discussions on GitHub
-- **Documentation** - Check this README and code comments
-
+| Platform | Link |
+|----------|------|
+| GitHub | [@abdallhx2](https://github.com/abdallhx2) |
+| Twitter | [@01DMXX](https://twitter.com/01DMXX) |
+| Location | Riyadh, Saudi Arabia |
 
 ---
 
 <div align="center">
-  <p><strong>Made with ❤️ by Abdullah Alhasani</strong></p>
-  <p><strong>صنع بـ ❤️ بواسطة عبدالله الحسني</strong></p>
-  
-  <p>
-    <a href="https://github.com/abdallhx2/portfolio-website">⭐ Star this repository if you found it helpful!</a>
-  </p>
-  <p>
-    <a href="https://github.com/abdallhx2/portfolio-website">⭐ ضع نجمة للمشروع إذا كان مفيداً!</a>
-  </p>
+
+**Built with Motion, Next.js, and attention to detail**
+
+**مبني بـ Motion و Next.js واهتمام بالتفاصيل**
+
+⭐ Star this repo if you found it inspiring!
+
 </div>
