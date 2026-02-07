@@ -6,9 +6,10 @@ import { ExternalLink, Github, Linkedin, Twitter, Instagram } from 'lucide-react
 import { SiReact, SiNextdotjs, SiFlutter, SiNodedotjs, SiPython, SiTypescript, SiFirebase, SiTensorflow, SiTailwindcss, SiDocker, SiGit, SiMongodb, SiPostgresql, SiFigma, SiVercel, SiOpenai } from 'react-icons/si';
 import { TextIconMarquee } from '@/components/ui/scroll-text-marquee';
 import { LiquidGradientButton, generateColorsFromPrimary } from '@/components/LiquidGradient';
-import { AuroraBackground } from '@/components/ui/aurora-background';
+import { BackgroundGradientAnimation } from '@/components/ui/background-gradient-animation';
 import { MorphingText } from '@/registry/magicui/morphing-text';
 import { easings, springs, rtlX } from '@/lib/motion';
+import { useTheme } from '@/context/ThemeContext';
 import { useContactDialog } from '@/components/home/ContactDialog';
 
 const helloTexts = [
@@ -16,8 +17,8 @@ const helloTexts = [
   "أهلاً",       // Arabic
   "Bonjour",    // French
   "你好",        // Chinese
-  "こんにちは",   // Japanese
   "Hola",       // Spanish
+  "こんにちは",   // Japanese
 ];
 
 interface PersonalInfo {
@@ -68,6 +69,8 @@ function rgbToHexInternal(r: number, g: number, b: number): string {
 
 export function HeroSection({ personalInfo, language, isRTL, t }: HeroSectionProps) {
   const { open: openContactDialog } = useContactDialog();
+  const { themeMode } = useTheme();
+  const isDark = themeMode === 'dark';
   const [primaryColor, setPrimaryColor] = useState<string>('#7c3aed');
 
   // Watch for theme changes and update primary color (debounced, no temp DOM elements)
@@ -128,9 +131,20 @@ export function HeroSection({ personalInfo, language, isRTL, t }: HeroSectionPro
   ];
 
   return (
-    <AuroraBackground
-      className="h-screen overflow-visible sticky top-0 z-0"
-      showRadialGradient={false}
+    <BackgroundGradientAnimation
+      gradientBackgroundStart={isDark ? 'rgb(10, 8, 16)' : 'rgb(235, 232, 240)'}
+      gradientBackgroundEnd={isDark ? 'rgb(14, 10, 22)' : 'rgb(242, 240, 248)'}
+      firstColor={isDark ? '42, 34, 55' : '208, 196, 225'}
+      secondColor={isDark ? '55, 38, 68' : '218, 202, 235'}
+      thirdColor={isDark ? '38, 30, 50' : '212, 200, 228'}
+      fourthColor={isDark ? '45, 36, 58' : '210, 198, 226'}
+      fifthColor={isDark ? '40, 32, 52' : '206, 196, 222'}
+      pointerColor={isDark ? '80, 48, 110' : '170, 145, 205'}
+      size="80%"
+      blendingValue="hard-light"
+      interactive={true}
+      containerClassName="!h-screen overflow-visible sticky top-0 z-0"
+      className="relative flex flex-col items-center justify-center h-full"
     >
       {/* Main content - centered */}
       <div className="w-full flex-1 flex items-center justify-center relative z-10">
@@ -170,7 +184,7 @@ export function HeroSection({ personalInfo, language, isRTL, t }: HeroSectionPro
             style={{ color: 'var(--muted-foreground)', fontSize: 'clamp(1.1rem, 0.9rem + 0.5vw, 1.25rem)' }}
           >
             {language === 'ar'
-              ? 'مهندس برمجيات سعودي ملم في تقنيات الذكاء الاصطناعي و النماذج اللغوية الكبيرة وتطبيقاتها في مختلف الأنظمة'
+              ? 'مهندس برمجيات سعودي خبير في تقنيات الذكاء الاصطناعي و النماذج اللغوية الكبيرة وتطبيقاتها في مختلف الأنظمة'
               : 'A Saudi software engineer proficient in building software and an expert in Large Language Model technologies and their applications in various systems'}
           </motion.p>
 
@@ -222,7 +236,7 @@ export function HeroSection({ personalInfo, language, isRTL, t }: HeroSectionPro
       {/* Tech Stack Scroll Marquee - Crossed X Layout */}
       <div
         className="w-full relative z-10 overflow-hidden"
-        style={{ transform: 'translateY(clamp(-4rem, -0.5rem - 3vw, -1rem))' }}
+        style={{ transform: 'translateY(clamp(-7rem, -2rem - 5vw, -3rem))' }}
       >
         <div
           className="relative w-full"
@@ -282,6 +296,6 @@ export function HeroSection({ personalInfo, language, isRTL, t }: HeroSectionPro
           </div>
         </div>
       </div>
-    </AuroraBackground>
+    </BackgroundGradientAnimation>
   );
 }

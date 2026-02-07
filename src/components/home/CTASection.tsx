@@ -3,14 +3,17 @@
 import { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { AuroraBackground } from '@/components/ui/aurora-background';
+import { BackgroundGradientAnimation } from '@/components/ui/background-gradient-animation';
 import { useLanguage } from '@/context/LanguageContext';
+import { useTheme } from '@/context/ThemeContext';
 import { springs } from '@/lib/motion';
 import { useContactDialog } from '@/components/home/ContactDialog';
 
 export function CTASection() {
   const { language, isRTL } = useLanguage();
   const { open: openDialog } = useContactDialog();
+  const { themeMode } = useTheme();
+  const isDark = themeMode === 'dark';
 
   // Flip words
   const flipWords =
@@ -28,7 +31,21 @@ export function CTASection() {
   }, [flipWords.length]);
 
   return (
-    <AuroraBackground className="h-[40vh] w-full" showRadialGradient={false}>
+    <BackgroundGradientAnimation
+      gradientBackgroundStart={isDark ? 'rgb(10, 8, 16)' : 'rgb(235, 232, 240)'}
+      gradientBackgroundEnd={isDark ? 'rgb(14, 10, 22)' : 'rgb(242, 240, 248)'}
+      firstColor={isDark ? '42, 34, 55' : '208, 196, 225'}
+      secondColor={isDark ? '55, 38, 68' : '218, 202, 235'}
+      thirdColor={isDark ? '38, 30, 50' : '212, 200, 228'}
+      fourthColor={isDark ? '45, 36, 58' : '210, 198, 226'}
+      fifthColor={isDark ? '40, 32, 52' : '206, 196, 222'}
+      pointerColor={isDark ? '80, 48, 110' : '170, 145, 205'}
+      size="80%"
+      blendingValue="hard-light"
+      interactive={true}
+      containerClassName="!h-[40vh] !w-full"
+      className="relative flex flex-col items-center justify-center h-full"
+    >
       <div className="relative z-10 flex items-center justify-center w-full h-full" dir={isRTL ? 'rtl' : 'ltr'}>
         <motion.div
           className="flex flex-col items-center justify-center"
@@ -53,7 +70,7 @@ export function CTASection() {
                   exit={{ y: 50, filter: 'blur(10px)', opacity: 0 }}
                   transition={{ duration: 0.4, ease: 'easeOut' }}
                   className="inline-block whitespace-nowrap"
-                  style={{ opacity: 0.85 }}
+                  style={{ color: 'var(--primary)' }}
                 >
                   {flipWords[currentIndex]}
                 </motion.span>
@@ -89,6 +106,6 @@ export function CTASection() {
           </motion.div>
         </motion.div>
       </div>
-    </AuroraBackground>
+    </BackgroundGradientAnimation>
   );
 }

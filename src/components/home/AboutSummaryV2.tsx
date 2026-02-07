@@ -4,6 +4,8 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useLanguage } from '@/context/LanguageContext';
+import { useTheme } from '@/context/ThemeContext';
+import { getColorScheme } from '@/data/colors';
 import { useTranslatedData } from '@/hooks/useTranslatedData';
 import AnimatedFrameworks from '@/components/ui/animated-frameworks';
 import { AboutStatistics } from './AboutStatistics';
@@ -17,10 +19,80 @@ import {
     sectionContent,
 } from '@/lib/motion';
 
+const POETRY_STARS = [
+    // Wave 1 — appear first with hemistich entry
+    { top: '5%', left: '8%', size: 30, color: 'primary', wave: 1 },
+    { top: '10%', left: '78%', size: 26, color: 'foreground', wave: 1 },
+    { top: '18%', left: '45%', size: 35, color: 'primary', wave: 1 },
+    { top: '3%', left: '62%', size: 28, color: 'foreground', wave: 1 },
+    { top: '22%', left: '15%', size: 40, color: 'primary', wave: 1 },
+    { top: '8%', left: '92%', size: 32, color: 'foreground', wave: 1 },
+    { top: '15%', left: '30%', size: 25, color: 'primary', wave: 1 },
+    { top: '25%', left: '88%', size: 38, color: 'foreground', wave: 1 },
+    { top: '12%', left: '55%', size: 27, color: 'primary', wave: 1 },
+    { top: '6%', left: '38%', size: 33, color: 'foreground', wave: 1 },
+    { top: '20%', left: '72%', size: 29, color: 'primary', wave: 1 },
+    { top: '2%', left: '22%', size: 36, color: 'foreground', wave: 1 },
+    // Wave 2 — mid entrance
+    { top: '35%', left: '5%', size: 42, color: 'primary', wave: 2 },
+    { top: '40%', left: '85%', size: 28, color: 'foreground', wave: 2 },
+    { top: '48%', left: '20%', size: 35, color: 'primary', wave: 2 },
+    { top: '33%', left: '68%', size: 30, color: 'foreground', wave: 2 },
+    { top: '55%', left: '92%', size: 45, color: 'primary', wave: 2 },
+    { top: '42%', left: '42%', size: 26, color: 'foreground', wave: 2 },
+    { top: '50%', left: '10%', size: 38, color: 'primary', wave: 2 },
+    { top: '38%', left: '55%', size: 32, color: 'foreground', wave: 2 },
+    { top: '45%', left: '75%', size: 27, color: 'primary', wave: 2 },
+    { top: '52%', left: '35%', size: 40, color: 'foreground', wave: 2 },
+    { top: '30%', left: '48%', size: 34, color: 'primary', wave: 2 },
+    // Wave 3 — final stars as hemistich settles
+    { top: '62%', left: '12%', size: 37, color: 'primary', wave: 3 },
+    { top: '68%', left: '82%', size: 29, color: 'foreground', wave: 3 },
+    { top: '75%', left: '28%', size: 44, color: 'primary', wave: 3 },
+    { top: '82%', left: '65%', size: 31, color: 'foreground', wave: 3 },
+    { top: '70%', left: '50%', size: 25, color: 'primary', wave: 3 },
+    { top: '88%', left: '8%', size: 39, color: 'foreground', wave: 3 },
+    { top: '65%', left: '90%', size: 33, color: 'primary', wave: 3 },
+    { top: '78%', left: '40%', size: 28, color: 'foreground', wave: 3 },
+    { top: '92%', left: '58%', size: 42, color: 'primary', wave: 3 },
+    { top: '85%', left: '18%', size: 36, color: 'foreground', wave: 3 },
+    { top: '72%', left: '70%', size: 30, color: 'primary', wave: 3 },
+    { top: '95%', left: '32%', size: 26, color: 'foreground', wave: 3 },
+] as const;
+
 export function AboutSummaryV2() {
     const { t, isRTL } = useLanguage();
+    const { colorScheme } = useTheme();
     const { personalInfo } = useTranslatedData();
     const sectionRef = useRef<HTMLElement>(null);
+
+    // Always render in dark mode regardless of global theme
+    const darkColors = getColorScheme(colorScheme, 'dark');
+    const forceDarkVars = {
+        backgroundColor: '#000',
+        colorScheme: 'dark',
+        '--foreground': darkColors.foreground,
+        '--primary': darkColors.primary,
+        '--primary-dark': darkColors.primaryDark,
+        '--background': darkColors.background,
+        '--card': darkColors.cardBg,
+        '--card-bg': darkColors.cardBg,
+        '--border': darkColors.border,
+        '--info': darkColors.info,
+        '--accent': darkColors.accent,
+        '--muted': darkColors.muted,
+        '--secondary': darkColors.secondary,
+        '--success': darkColors.success,
+        '--warning': darkColors.warning,
+        '--error': darkColors.error,
+        // Fixed dark values (not scheme-specific)
+        '--muted-foreground': 'oklch(0.708 0 0)',
+        '--card-foreground': 'oklch(0.985 0 0)',
+        '--primary-foreground': 'oklch(0.205 0 0)',
+        '--accent-foreground': 'oklch(0.985 0 0)',
+        '--glass-bg': 'rgba(24, 24, 27, 0.7)',
+        '--glass-border': 'rgba(63, 63, 70, 0.4)',
+    } as React.CSSProperties;
     // Scroll-linked parallax for the image
     const { scrollYProgress } = useScroll({
         target: sectionRef,
@@ -40,11 +112,19 @@ export function AboutSummaryV2() {
     const poetryX2 = useTransform(poetryProgress, [0.35, 0.65], ['-100vw', '0vw']);
     const poetryOpacity2 = useTransform(poetryProgress, [0.35, 0.5], [0, 1]);
 
+    // Stars — 3 waves synced with second hemistich (0.35 → 0.65)
+    const starsScale1 = useTransform(poetryProgress, [0.35, 0.55], [0, 1]);
+    const starsOpacity1 = useTransform(poetryProgress, [0.35, 0.50], [0, 1]);
+    const starsScale2 = useTransform(poetryProgress, [0.40, 0.60], [0, 1]);
+    const starsOpacity2 = useTransform(poetryProgress, [0.40, 0.55], [0, 1]);
+    const starsScale3 = useTransform(poetryProgress, [0.45, 0.65], [0, 1]);
+    const starsOpacity3 = useTransform(poetryProgress, [0.45, 0.60], [0, 1]);
+
     return (
         <section
             ref={sectionRef}
             className="relative min-h-dvh lg:overflow-clip z-10"
-            style={{ backgroundColor: '#000' }}
+            style={forceDarkVars}
         >
             {/* Subtle background pattern */}
             <motion.div
@@ -223,6 +303,33 @@ export function AboutSummaryV2() {
 
             {/* ── Poetry Verse ── */}
             <div ref={poetryRef} className="relative py-16 sm:py-24 lg:py-32 overflow-hidden" dir="rtl">
+                {/* Stars */}
+                {POETRY_STARS.map((star, i) => {
+                    const s = star.wave === 1
+                        ? { scale: starsScale1, opacity: starsOpacity1 }
+                        : star.wave === 2
+                            ? { scale: starsScale2, opacity: starsOpacity2 }
+                            : { scale: starsScale3, opacity: starsOpacity3 };
+                    return (
+                        <motion.svg
+                            key={i}
+                            className={`absolute pointer-events-none${i % 2 === 0 ? ' hidden lg:block' : ''}`}
+                            style={{
+                                top: star.top,
+                                left: star.left,
+                                width: `clamp(${Math.round(star.size * 0.45)}px, ${(star.size / 14).toFixed(1)}vw, ${star.size}px)`,
+                                height: `clamp(${Math.round(star.size * 0.45)}px, ${(star.size / 14).toFixed(1)}vw, ${star.size}px)`,
+                                scale: s.scale,
+                                opacity: s.opacity,
+                            }}
+                            viewBox="0 0 24 24"
+                            fill={star.color === 'primary' ? 'var(--primary)' : 'var(--foreground)'}
+                        >
+                            <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5Z" />
+                        </motion.svg>
+                    );
+                })}
+
                 <div className="flex flex-col items-center gap-4 sm:gap-6 lg:gap-8 w-full px-4">
                     <motion.p
                         className="font-bold text-center whitespace-nowrap select-none"

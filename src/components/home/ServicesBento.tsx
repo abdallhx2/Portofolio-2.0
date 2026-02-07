@@ -4,9 +4,8 @@ import { useRef, forwardRef } from 'react';
 import dynamic from 'next/dynamic';
 import { motion } from 'motion/react';
 import { useLanguage } from '@/context/LanguageContext';
-import { useTheme } from '@/context/ThemeContext';
 import { AnimatedBeam } from '@/components/ui/animated-beam';
-import { BackgroundGradientAnimation } from '@/components/ui/background-gradient-animation';
+import { AuroraBackground } from '@/components/ui/aurora-background';
 import { sectionViewport, sectionHeader } from '@/lib/motion';
 // Heavy components loaded lazily — saves ~500KB from initial bundle
 const Globe = dynamic(() => import('@/components/ui/globe').then(m => m.Globe), {
@@ -296,23 +295,11 @@ function BentoCard({
 /* ─── المكون الرئيسي ─── */
 export function ServicesBento() {
   const { isRTL, language } = useLanguage();
-  const { themeMode } = useTheme();
-  const isDark = themeMode === 'dark';
 
   return (
-    <BackgroundGradientAnimation
-      gradientBackgroundStart={isDark ? 'rgb(10, 10, 15)' : 'rgb(230, 228, 235)'}
-      gradientBackgroundEnd={isDark ? 'rgb(15, 10, 25)' : 'rgb(240, 238, 245)'}
-      firstColor={isDark ? '30, 30, 60' : '180, 175, 200'}
-      secondColor={isDark ? '50, 20, 80' : '200, 190, 220'}
-      thirdColor={isDark ? '20, 40, 70' : '190, 200, 215'}
-      fourthColor={isDark ? '40, 15, 60' : '210, 200, 225'}
-      fifthColor={isDark ? '25, 25, 50' : '195, 190, 210'}
-      pointerColor={isDark ? '60, 40, 100' : '170, 160, 200'}
-      size="80%"
-      blendingValue="hard-light"
-      interactive={false}
-      containerClassName="!w-full !h-auto !relative py-[clamp(5rem,3rem+4vw,7rem)]"
+    <AuroraBackground
+      className="w-full py-[clamp(5rem,3rem+4vw,7rem)]"
+      showRadialGradient={false}
     >
       <div className="relative z-10 flex flex-col items-center justify-center" dir={isRTL ? 'rtl' : 'ltr'}>
         <div className="container-unified">
@@ -398,7 +385,7 @@ export function ServicesBento() {
           </div>
         </div>
       </div>
-    </BackgroundGradientAnimation>
+    </AuroraBackground>
   );
 }
 

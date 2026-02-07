@@ -63,14 +63,15 @@ export default function Navbar() {
         className="fixed top-6 inset-x-0 max-w-2xl mx-auto z-50 hidden lg:block px-4"
       >
         <nav
-          className={`rounded-full border shadow-lg flex items-center justify-between px-8 py-3 ${isRTL ? 'flex-row-reverse' : ''}`}
+          dir={isRTL ? 'rtl' : 'ltr'}
+          className="rounded-full border shadow-lg flex items-center justify-between px-8 py-3"
           style={{
             backgroundColor: 'var(--card)',
             borderColor: 'var(--border)',
           }}
         >
           {/* Nav Links */}
-          <div className={`flex items-center gap-6 ${isRTL ? 'flex-row-reverse' : ''}`}>
+          <div className="flex items-center gap-6">
             {navigationItems.map((item) => (
               <Link
                 key={item.href}
@@ -83,8 +84,8 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Right side controls */}
-          <div className={`flex items-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
+          {/* Controls */}
+          <div className="flex items-center gap-3">
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
@@ -141,14 +142,15 @@ export default function Navbar() {
         className="lg:hidden fixed top-3 inset-x-0 mx-auto z-50 px-3 max-w-md"
       >
         <nav
-          className={`rounded-full border shadow-lg flex items-center justify-between px-4 py-2.5 ${isRTL ? 'flex-row-reverse' : ''}`}
+          dir={isRTL ? 'rtl' : 'ltr'}
+          className="rounded-full border shadow-lg flex items-center justify-between px-4 py-2.5"
           style={{
             backgroundColor: 'var(--card)',
             borderColor: 'var(--border)',
           }}
         >
           {/* Nav Links as text */}
-          <div className={`flex items-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
+          <div className="flex items-center gap-3">
             {navigationItems.map((item) => (
               <Link
                 key={item.href}
@@ -162,7 +164,7 @@ export default function Navbar() {
           </div>
 
           {/* Controls */}
-          <div className={`flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
+          <div className="flex items-center gap-2">
             <button
               onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
               className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs transition-all duration-200 hover:scale-110"

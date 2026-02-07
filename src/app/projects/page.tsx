@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { ExternalLink, Filter, LayoutGrid, List, Star } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
@@ -15,6 +15,7 @@ import {
 type ViewMode = 'grid' | 'list';
 
 export default function ProjectsPage() {
+  const router = useRouter();
   const { t, isRTL } = useLanguage();
   const { projectCategories, getProjectsByCategory } = useTranslatedData();
   const [activeCategory, setActiveCategory] = useState(projectCategories[0]);
@@ -148,9 +149,9 @@ export default function ProjectsPage() {
                       transition={{ delay: index * 0.06, duration: 0.35, ease: easings.smooth }}
                       className={isWide ? 'md:col-span-2' : ''}
                     >
-                      <Link
-                        href={`/projects/${project.id}`}
-                        className="group block h-full overflow-hidden rounded-xl transition-all hover:-translate-y-1 hover:shadow-lg"
+                      <div
+                        onClick={() => router.push(`/projects/${project.id}`)}
+                        className="group block h-full overflow-hidden rounded-xl transition-all hover:-translate-y-1 hover:shadow-lg cursor-pointer"
                         style={{
                           backgroundColor: 'var(--card)',
                           border: '1px solid var(--border)',
@@ -265,7 +266,7 @@ export default function ProjectsPage() {
                             )}
                           </div>
                         </div>
-                      </Link>
+                      </div>
                     </motion.div>
                   );
                 })}
@@ -287,9 +288,9 @@ export default function ProjectsPage() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.06, duration: 0.35, ease: easings.smooth }}
                   >
-                    <Link
-                      href={`/projects/${project.id}`}
-                      className="group flex flex-col sm:flex-row overflow-hidden rounded-xl transition-all hover:-translate-y-0.5 hover:shadow-lg"
+                    <div
+                      onClick={() => router.push(`/projects/${project.id}`)}
+                      className="group flex flex-col sm:flex-row overflow-hidden rounded-xl transition-all hover:-translate-y-0.5 hover:shadow-lg cursor-pointer"
                       style={{
                         backgroundColor: 'var(--card)',
                         border: '1px solid var(--border)',
@@ -385,7 +386,7 @@ export default function ProjectsPage() {
                           </div>
                         </div>
                       </div>
-                    </Link>
+                    </div>
                   </motion.div>
                 ))}
               </motion.div>
