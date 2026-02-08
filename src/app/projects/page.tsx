@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { ExternalLink, Filter, LayoutGrid, List, Star } from 'lucide-react';
+import { ExternalLink, Filter, LayoutGrid, List, Star, ImageOff } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLanguage } from '@/context/LanguageContext';
@@ -14,6 +14,26 @@ import {
 
 type ViewMode = 'grid' | 'list';
 
+// Check if image is a placeholder/coming soon
+const isComingSoonImage = (imagePath: string) => {
+  return imagePath.includes('coming-soon') || imagePath === '/images/coming-soon.jpg';
+};
+
+// Grid pattern for varied layout: 0=normal, 1=wide (col-span-2), 2=tall (row-span-2)
+const getGridPattern = (index: number): { colSpan: number; rowSpan: number } => {
+  const patterns = [
+    { colSpan: 2, rowSpan: 1 }, // 0: wide
+    { colSpan: 1, rowSpan: 1 }, // 1: normal
+    { colSpan: 1, rowSpan: 1 }, // 2: normal
+    { colSpan: 1, rowSpan: 1 }, // 3: normal
+    { colSpan: 1, rowSpan: 1 }, // 4: normal
+    { colSpan: 2, rowSpan: 1 }, // 5: wide
+    { colSpan: 1, rowSpan: 1 }, // 6: normal
+    { colSpan: 1, rowSpan: 1 }, // 7: normal
+  ];
+  return patterns[index % patterns.length];
+};
+
 export default function ProjectsPage() {
   const router = useRouter();
   const { t, isRTL } = useLanguage();
@@ -21,7 +41,11 @@ export default function ProjectsPage() {
   const [activeCategory, setActiveCategory] = useState(projectCategories[0]);
   const [viewMode, setViewMode] = useState<ViewMode>('grid');
 
-  const filteredProjects = getProjectsByCategory(activeCategory);
+  // Get projects sorted by year (newest first)
+  const filteredProjects = useMemo(() => {
+    const projects = getProjectsByCategory(activeCategory);
+    return [...projects].sort((a, b) => b.year - a.year);
+  }, [activeCategory, getProjectsByCategory]);
 
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -140,7 +164,9 @@ export default function ProjectsPage() {
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-auto"
               >
                 {filteredProjects.map((project, index) => {
-                  const isWide = index % 4 === 0;
+                  const pattern = getGridPattern(index);
+                  const isWide = pattern.colSpan === 2;
+                  const hasComingSoon = isComingSoonImage(project.image);
                   return (
                     <motion.div
                       key={project.id}
@@ -159,12 +185,31 @@ export default function ProjectsPage() {
                       >
                         {/* Image */}
                         <div className={`relative overflow-hidden ${isWide ? 'aspect-[2.2/1]' : 'aspect-video'}`}>
-                          <Image
-                            src={project.image}
-                            alt={project.title}
-                            fill
-                            className="object-cover transition-transform duration-500 group-hover:scale-105"
-                          />
+                          {hasComingSoon ? (
+                            <div
+                              className="absolute inset-0 flex flex-col items-center justify-center"
+                              style={{ backgroundColor: 'var(--background)' }}
+                            >
+                              <ImageOff
+                                size={40}
+                                className="mb-2 opacity-30"
+                                style={{ color: 'var(--muted-foreground)' }}
+                              />
+                              <span
+                                className="text-body-sm font-medium opacity-50"
+                                style={{ color: 'var(--muted-foreground)' }}
+                              >
+                                {isRTL ? 'قيد الرفع' : 'Coming Soon'}
+                              </span>
+                            </div>
+                          ) : (
+                            <Image
+                              src={project.image}
+                              alt={project.title}
+                              fill
+                              className="object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                          )}
                           <div
                             className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                             style={{
@@ -281,7 +326,9 @@ export default function ProjectsPage() {
                 transition={{ duration: 0.3 }}
                 className="flex flex-col gap-4"
               >
-                {filteredProjects.map((project, index) => (
+                {filteredProjects.map((project, index) => {
+                  const hasComingSoon = isComingSoonImage(project.image);
+                  return (
                   <motion.div
                     key={project.id}
                     initial={{ opacity: 0, x: isRTL ? 25 : -25 }}
@@ -298,12 +345,31 @@ export default function ProjectsPage() {
                     >
                       {/* Image */}
                       <div className="relative sm:w-[280px] flex-shrink-0 aspect-video sm:aspect-auto overflow-hidden">
-                        <Image
-                          src={project.image}
-                          alt={project.title}
-                          fill
-                          className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
+                        {hasComingSoon ? (
+                          <div
+                            className="absolute inset-0 flex flex-col items-center justify-center"
+                            style={{ backgroundColor: 'var(--background)' }}
+                          >
+                            <ImageOff
+                              size={32}
+                              className="mb-1 opacity-30"
+                              style={{ color: 'var(--muted-foreground)' }}
+                            />
+                            <span
+                              className="text-body-sm opacity-50"
+                              style={{ color: 'var(--muted-foreground)' }}
+                            >
+                              {isRTL ? 'قيد الرفع' : 'Coming Soon'}
+                            </span>
+                          </div>
+                        ) : (
+                          <Image
+                            src={project.image}
+                            alt={project.title}
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                        )}
                         {project.featured && (
                           <div
                             className="absolute top-3 right-3 flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full"
@@ -388,7 +454,8 @@ export default function ProjectsPage() {
                       </div>
                     </div>
                   </motion.div>
-                ))}
+                  );
+                })}
               </motion.div>
             )}
           </AnimatePresence>

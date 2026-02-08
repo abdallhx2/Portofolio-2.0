@@ -6,9 +6,14 @@ import { motion, AnimatePresence } from 'motion/react';
 import { sectionHeader, sectionContent, sectionViewport, staggerContainer, staggerItem, fadeInUp, fadeInScale, easings } from '@/lib/motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, Target, Lightbulb, Trophy, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Target, Lightbulb, Trophy, ExternalLink, ChevronLeft, ChevronRight, ImageOff } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import { useState } from 'react';
+
+// Check if image is a placeholder/coming soon
+const isComingSoonImage = (imagePath: string) => {
+  return imagePath.includes('coming-soon') || imagePath === '/images/coming-soon.jpg';
+};
 
 interface ProjectPageClientProps {
   project: ProjectTranslation;
@@ -50,17 +55,38 @@ export default function ProjectPageClient({ project }: ProjectPageClientProps) {
         >
           <div className="relative rounded-2xl overflow-hidden">
             <div className="relative aspect-[2/1] sm:aspect-[16/9]">
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                className="object-cover"
-                priority
-              />
+              {isComingSoonImage(project.image) ? (
+                <div
+                  className="absolute inset-0 flex flex-col items-center justify-center"
+                  style={{ backgroundColor: 'var(--card)' }}
+                >
+                  <ImageOff
+                    size={64}
+                    className="mb-3 opacity-30"
+                    style={{ color: 'var(--muted-foreground)' }}
+                  />
+                  <span
+                    className="text-body font-medium opacity-50"
+                    style={{ color: 'var(--muted-foreground)' }}
+                  >
+                    {isRTL ? 'الصور قيد الرفع' : 'Images Coming Soon'}
+                  </span>
+                </div>
+              ) : (
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              )}
               <div
                 className="absolute inset-0"
                 style={{
-                  background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.3) 100%)',
+                  background: isComingSoonImage(project.image)
+                    ? 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 40%)'
+                    : 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.3) 100%)',
                 }}
               />
 
@@ -219,7 +245,7 @@ export default function ProjectPageClient({ project }: ProjectPageClientProps) {
         </div>
 
         {/* Image Gallery */}
-        {project.gallery && project.gallery.length > 0 && (
+        {project.gallery && project.gallery.length > 0 && !isComingSoonImage(project.gallery[0]) && (
           <div className="pb-8">
             <motion.div
               initial="hidden"
@@ -365,7 +391,26 @@ export default function ProjectPageClient({ project }: ProjectPageClientProps) {
                     className="block section-glass-dark rounded-xl overflow-hidden hover:-translate-y-1 hover:shadow-xl transition-all"
                   >
                     <div className="relative aspect-video">
-                      <Image src={otherProject.image} alt={otherProject.title} fill className="object-cover" />
+                      {isComingSoonImage(otherProject.image) ? (
+                        <div
+                          className="absolute inset-0 flex flex-col items-center justify-center"
+                          style={{ backgroundColor: 'var(--background)' }}
+                        >
+                          <ImageOff
+                            size={32}
+                            className="mb-1 opacity-30"
+                            style={{ color: 'var(--muted-foreground)' }}
+                          />
+                          <span
+                            className="text-body-sm opacity-50"
+                            style={{ color: 'var(--muted-foreground)' }}
+                          >
+                            {isRTL ? 'قيد الرفع' : 'Coming Soon'}
+                          </span>
+                        </div>
+                      ) : (
+                        <Image src={otherProject.image} alt={otherProject.title} fill className="object-cover" />
+                      )}
                     </div>
                     <div style={{ padding: 'clamp(0.75rem, 2vw, 1rem)' }}>
                       <div className="flex items-center gap-2 mb-2">
