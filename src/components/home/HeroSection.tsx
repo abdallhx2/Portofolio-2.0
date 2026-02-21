@@ -143,12 +143,12 @@ export function HeroSection({ personalInfo, language, isRTL, t }: HeroSectionPro
       size="80%"
       blendingValue="hard-light"
       interactive={true}
-      containerClassName="!h-screen overflow-visible sticky top-0 z-0"
-      className="relative flex flex-col items-center justify-center h-full"
+      containerClassName="!h-screen overflow-hidden md:overflow-visible md:sticky top-0 z-0"
+      className="relative h-full"
     >
-      {/* Main content - centered */}
-      <div className="w-full flex-1 flex items-center justify-center relative z-10">
-        <div className="container-unified text-center space-y-8">
+      {/* Main content - centered over full hero height */}
+      <div className="absolute inset-0 flex items-center justify-center z-10">
+        <div className="container-unified text-center space-y-4 md:space-y-8">
 
           {/* Greeting */}
           <motion.div
@@ -156,7 +156,7 @@ export function HeroSection({ personalInfo, language, isRTL, t }: HeroSectionPro
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.7, ease: easings.decelerate }}
             dir="ltr"
-            style={{ color: 'var(--primary)', textShadow: '0 4px 30px rgba(var(--primary-rgb), 0.25)', marginBottom: 'clamp(4rem, 2.5rem + 4vw, 7rem)' }}
+            style={{ color: 'var(--primary)', textShadow: '0 4px 30px rgba(var(--primary-rgb), 0.25)', marginBottom: 'clamp(0rem, -3rem + 8vw, 7rem)' }}
           >
             <MorphingText
               texts={helloTexts}
@@ -189,7 +189,7 @@ export function HeroSection({ personalInfo, language, isRTL, t }: HeroSectionPro
           </motion.p>
 
           {/* CTA & Social Links */}
-          <div className="flex flex-col sm:flex-row items-center justify-center pt-6" style={{ gap: 'clamp(1.25rem, 0.75rem + 1.5vw, 2rem)' }}>
+          <div className="flex flex-col sm:flex-row items-center justify-center pt-2 md:pt-6" style={{ gap: 'clamp(1rem, 0.75rem + 1.5vw, 2rem)' }}>
             {/* CTA Button */}
             <motion.div
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -235,8 +235,8 @@ export function HeroSection({ personalInfo, language, isRTL, t }: HeroSectionPro
 
       {/* Tech Stack Scroll Marquee - Crossed X Layout */}
       <div
-        className="w-full relative z-10 overflow-hidden"
-        style={{ transform: 'translateY(clamp(-7rem, -2rem - 5vw, -3rem))' }}
+        className="absolute bottom-0 w-full z-0 overflow-hidden pointer-events-none"
+        style={{ transform: 'translateY(clamp(-1rem, -0.5rem - 1vw, -0.75rem))' }}
       >
         <div
           className="relative w-full"
