@@ -296,6 +296,30 @@ export const projectsTranslations: Record<Language, ProjectTranslation[]> = {
       solution: "An Arabic-first platform with integrated code editor, live preview, context-aware AI assistant, structured learning paths, and comprehensive gamification — all designed RTL-first from the database schema to the UI.",
       result: "A complete educational ecosystem that takes absolute beginners from zero to writing real code through interactive exercises, AI-guided learning, and motivational gamification in their native Arabic language.",
       technologies: ["Next.js", "TypeScript", "PostgreSQL", "CodeMirror 6", "OpenRouter AI", "Zoom API", "Docker"]
+    },
+    {
+      id: "traweh-directory",
+      title: "Traweh - Taraweeh Prayer Directory",
+      description: "A comprehensive Arabic web platform that helps worshippers find the best Taraweeh prayer mosques and imams across Makkah, Madinah, Jeddah, and Riyadh during Ramadan. Born from a real community need — every Ramadan, millions search for mosques with distinguished reciters, yet no dedicated platform existed to guide them. Traweh fills this gap with a rich database covering 259+ districts, complete Haramain schedules for all 30 nights with imam assignments for each Taraweeh and Tahajjud session, and audio samples so users can preview each imam's recitation style before choosing their mosque. The platform features an interactive map powered by Leaflet with GPS-based nearest mosque detection, a smart duplicate-detection system using Haversine formula within 50-meter radius, and a community-driven data collection pipeline where contributors can submit mosques without registration. One of the most challenging aspects was the audio processing pipeline — built entirely in-browser using FFmpeg.wasm, it automatically trims recordings to 45 seconds, compresses to 128kbps mono MP3, and extracts audio from video files. A separate Python service on Render handles YouTube audio extraction with async job queues. The location verification system parses 5 different Google Maps URL formats to extract coordinates and cross-references them against existing mosques to prevent duplicates. The platform serves as an essential Ramadan companion, transforming the mosque selection experience from word-of-mouth into a data-driven, audio-enriched discovery process.",
+      shortDescription: "Arabic platform helping worshippers find Taraweeh mosques and imams with audio samples and interactive maps",
+      category: "Web Development",
+      tags: ["Next.js", "PWA", "Leaflet Maps", "FFmpeg", "Supabase", "Arabic-First"],
+      image: "/images/projects/traweh/traweh-hero.png",
+      gallery: [
+        "/images/projects/traweh/traweh-hero.png",
+        "/images/projects/traweh/traweh-mobile.png",
+        "/images/projects/traweh/traweh-map.png",
+        "/images/projects/traweh/traweh-haram.png"
+      ],
+      client: "Community Project",
+      duration: "3 months",
+      year: 2025,
+      url: "https://traweh.org",
+      featured: true,
+      challenge: "Every Ramadan, millions of worshippers struggle to find mosques with their preferred reciters — no centralized, audio-enriched directory existed for Taraweeh prayers across Saudi cities.",
+      solution: "A PWA platform with interactive maps, in-browser audio processing via FFmpeg.wasm, community-driven data collection, Haramain schedules for 30 nights, and smart mosque duplicate detection using geolocation.",
+      result: "A production-ready Ramadan companion serving worshippers across 4 cities and 259+ districts, with complete Haramain schedules, audio previews for imam recitations, and a contributor-powered data ecosystem that grows organically each Ramadan.",
+      technologies: ["Next.js 14", "TypeScript", "Prisma", "PostgreSQL", "Supabase", "Leaflet", "FFmpeg.wasm", "TailwindCSS", "PWA", "Vercel"]
     }
 
   ],
@@ -568,6 +592,30 @@ export const projectsTranslations: Record<Language, ProjectTranslation[]> = {
       solution: "منصة عربية أولاً مع محرر كود مدمج، معاينة حية، مساعد ذكي واعٍ بالسياق، مسارات تعلم منظمة، وتحفيز شامل — كلها مصممة RTL أولاً من مخطط قاعدة البيانات إلى واجهة المستخدم.",
       result: "منظومة تعليمية متكاملة تأخذ المبتدئ تماماً من الصفر إلى كتابة كود حقيقي عبر تمارين تفاعلية، تعلم موجّه بالذكاء الاصطناعي، وتحفيز ممتع بلغته العربية الأم.",
       technologies: ["Next.js", "TypeScript", "PostgreSQL", "CodeMirror 6", "OpenRouter AI", "Zoom API", "Docker"]
+    },
+    {
+      id: "traweh-directory",
+      title: "تراويح - دليل أئمة التراويح",
+      description: "منصة ويب عربية شاملة تُعين المصلين على إيجاد أفضل مساجد التراويح والأئمة في مكة المكرمة والمدينة المنورة وجدة والرياض خلال شهر رمضان. وُلد المشروع من حاجة مجتمعية حقيقية — كل رمضان، يبحث الملايين عن مساجد بقراء مميزين، ولم تكن هناك منصة مخصصة لإرشادهم. تراويح يسد هذه الفجوة بقاعدة بيانات غنية تغطي أكثر من 259 حياً، وجداول كاملة للحرمين الشريفين لجميع ليالي رمضان الثلاثين مع توزيع الأئمة لكل تسليمة تراويح وتهجد، وعينات صوتية تتيح للمستخدم الاستماع لأسلوب تلاوة كل إمام قبل اختيار مسجده. تتميز المنصة بخريطة تفاعلية مدعومة بـ Leaflet مع كشف أقرب المساجد عبر GPS، ونظام ذكي لكشف التكرار باستخدام معادلة Haversine ضمن نطاق 50 متراً، وخط إمداد بيانات مجتمعي يتيح للمساهمين إضافة المساجد بدون تسجيل. من أصعب جوانب المشروع كان خط معالجة الصوتيات — مبني بالكامل في المتصفح باستخدام FFmpeg.wasm، يقص التسجيلات تلقائياً إلى 45 ثانية، ويضغطها إلى 128 كيلوبت مونو MP3، ويستخرج الصوت من ملفات الفيديو. خدمة Python منفصلة على Render تعالج استخراج الصوت من يوتيوب بطوابير مهام غير متزامنة. نظام التحقق من الموقع يحلل 5 أنماط مختلفة من روابط Google Maps لاستخراج الإحداثيات ومقارنتها بالمساجد الموجودة لمنع التكرار. المنصة تخدم كرفيق رمضاني أساسي، تحوّل تجربة اختيار المسجد من التناقل الشفهي إلى اكتشاف مبني على البيانات ومُعزز بالصوت.",
+      shortDescription: "منصة عربية تُعين المصلين على إيجاد مساجد التراويح والأئمة مع عينات صوتية وخرائط تفاعلية",
+      category: "تطوير الويب",
+      tags: ["Next.js", "PWA", "Leaflet Maps", "FFmpeg", "Supabase", "Arabic-First"],
+      image: "/images/projects/traweh/traweh-hero.png",
+      gallery: [
+        "/images/projects/traweh/traweh-hero.png",
+        "/images/projects/traweh/traweh-mobile.png",
+        "/images/projects/traweh/traweh-map.png",
+        "/images/projects/traweh/traweh-haram.png"
+      ],
+      client: "مشروع مجتمعي",
+      duration: "3 أشهر",
+      year: 2025,
+      url: "https://traweh.org",
+      featured: true,
+      challenge: "كل رمضان، يعاني ملايين المصلين في إيجاد مساجد بقرائهم المفضلين — لم يكن هناك دليل مركزي مُعزز بالصوت لصلاة التراويح في المدن السعودية.",
+      solution: "منصة PWA بخرائط تفاعلية، معالجة صوت في المتصفح عبر FFmpeg.wasm، جمع بيانات مجتمعي، جداول الحرمين لـ30 ليلة، وكشف ذكي لتكرار المساجد باستخدام الموقع الجغرافي.",
+      result: "رفيق رمضاني جاهز للإنتاج يخدم المصلين في 4 مدن وأكثر من 259 حياً، مع جداول كاملة للحرمين الشريفين، معاينات صوتية لتلاوات الأئمة، ومنظومة بيانات يغذيها المساهمون تنمو عضوياً كل رمضان.",
+      technologies: ["Next.js 14", "TypeScript", "Prisma", "PostgreSQL", "Supabase", "Leaflet", "FFmpeg.wasm", "TailwindCSS", "PWA", "Vercel"]
     }
   ]
 };
