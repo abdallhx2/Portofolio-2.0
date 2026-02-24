@@ -39,9 +39,28 @@ const useMorphingText = (texts: string[]) => {
   const morphRef = useRef(0)
   const cooldownRef = useRef(0)
   const timeRef = useRef(new Date())
+  const isVisibleRef = useRef(true)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const text1Ref = useRef<HTMLSpanElement>(null)
   const text2Ref = useRef<HTMLSpanElement>(null)
+
+  // Pause animation when off-screen
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting
+        if (entry.isIntersecting) {
+          timeRef.current = new Date() // Reset time to avoid dt spike
+        }
+      },
+      { threshold: 0, rootMargin: '100px' }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   const setStyles = useCallback(
     (fraction: number) => {
@@ -99,6 +118,8 @@ const useMorphingText = (texts: string[]) => {
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate)
 
+      if (!isVisibleRef.current) return // Skip work when off-screen
+
       const newTime = new Date()
       const dt = (newTime.getTime() - timeRef.current.getTime()) / 1000
       timeRef.current = newTime
@@ -115,7 +136,7 @@ const useMorphingText = (texts: string[]) => {
     }
   }, [doMorph, doCooldown])
 
-  return { text1Ref, text2Ref }
+  return { text1Ref, text2Ref, containerRef }
 }
 
 interface MorphingTextProps {
@@ -124,9 +145,9 @@ interface MorphingTextProps {
 }
 
 const Texts: React.FC<Pick<MorphingTextProps, "texts">> = ({ texts }) => {
-  const { text1Ref, text2Ref } = useMorphingText(texts)
+  const { text1Ref, text2Ref, containerRef } = useMorphingText(texts)
   return (
-    <>
+    <div ref={containerRef} className="absolute inset-0">
       <span
         className="absolute inset-x-0 top-0 m-auto inline-block w-full"
         ref={text1Ref}
@@ -135,7 +156,7 @@ const Texts: React.FC<Pick<MorphingTextProps, "texts">> = ({ texts }) => {
         className="absolute inset-x-0 top-0 m-auto inline-block w-full"
         ref={text2Ref}
       />
-    </>
+    </div>
   )
 }
 

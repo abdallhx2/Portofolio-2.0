@@ -42,7 +42,7 @@
   --container-max: 1600px;
 
   /* Typography Scale - Fluid */
-  --text-hero: clamp(6.5rem, 18vw, 13rem);
+  --text-hero: clamp(4.5rem, 15vw, 11rem);
   --text-hero-sm: clamp(2rem, 6vw, 5rem);
   --text-section: clamp(1.5rem, 4vw, 2.5rem);
   --text-section-sm: clamp(1.25rem, 3vw, 2rem);
@@ -614,6 +614,7 @@ body {
 .stacking-card {
   position: sticky;
   will-change: transform, opacity;
+  contain: layout style;
 }
 
 .stack-card-height {
@@ -664,6 +665,12 @@ body {
 
 .will-change-transform {
   will-change: transform;
+}
+
+/* Gradient animation blobs — promote to own GPU layer */
+.gradients-container > div {
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 /* Mobile Arabic font adjustment */

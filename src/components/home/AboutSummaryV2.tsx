@@ -19,47 +19,6 @@ import {
     sectionContent,
 } from '@/lib/motion';
 
-const POETRY_STARS = [
-    // Wave 1 — appear first with hemistich entry
-    { top: '5%', left: '8%', size: 30, color: 'primary', wave: 1 },
-    { top: '10%', left: '78%', size: 26, color: 'foreground', wave: 1 },
-    { top: '18%', left: '45%', size: 35, color: 'primary', wave: 1 },
-    { top: '3%', left: '62%', size: 28, color: 'foreground', wave: 1 },
-    { top: '22%', left: '15%', size: 40, color: 'primary', wave: 1 },
-    { top: '8%', left: '92%', size: 32, color: 'foreground', wave: 1 },
-    { top: '15%', left: '30%', size: 25, color: 'primary', wave: 1 },
-    { top: '25%', left: '88%', size: 38, color: 'foreground', wave: 1 },
-    { top: '12%', left: '55%', size: 27, color: 'primary', wave: 1 },
-    { top: '6%', left: '38%', size: 33, color: 'foreground', wave: 1 },
-    { top: '20%', left: '72%', size: 29, color: 'primary', wave: 1 },
-    { top: '2%', left: '22%', size: 36, color: 'foreground', wave: 1 },
-    // Wave 2 — mid entrance
-    { top: '35%', left: '5%', size: 42, color: 'primary', wave: 2 },
-    { top: '40%', left: '85%', size: 28, color: 'foreground', wave: 2 },
-    { top: '48%', left: '20%', size: 35, color: 'primary', wave: 2 },
-    { top: '33%', left: '68%', size: 30, color: 'foreground', wave: 2 },
-    { top: '55%', left: '92%', size: 45, color: 'primary', wave: 2 },
-    { top: '42%', left: '42%', size: 26, color: 'foreground', wave: 2 },
-    { top: '50%', left: '10%', size: 38, color: 'primary', wave: 2 },
-    { top: '38%', left: '55%', size: 32, color: 'foreground', wave: 2 },
-    { top: '45%', left: '75%', size: 27, color: 'primary', wave: 2 },
-    { top: '52%', left: '35%', size: 40, color: 'foreground', wave: 2 },
-    { top: '30%', left: '48%', size: 34, color: 'primary', wave: 2 },
-    // Wave 3 — final stars as hemistich settles
-    { top: '62%', left: '12%', size: 37, color: 'primary', wave: 3 },
-    { top: '68%', left: '82%', size: 29, color: 'foreground', wave: 3 },
-    { top: '75%', left: '28%', size: 44, color: 'primary', wave: 3 },
-    { top: '82%', left: '65%', size: 31, color: 'foreground', wave: 3 },
-    { top: '70%', left: '50%', size: 25, color: 'primary', wave: 3 },
-    { top: '88%', left: '8%', size: 39, color: 'foreground', wave: 3 },
-    { top: '65%', left: '90%', size: 33, color: 'primary', wave: 3 },
-    { top: '78%', left: '40%', size: 28, color: 'foreground', wave: 3 },
-    { top: '92%', left: '58%', size: 42, color: 'primary', wave: 3 },
-    { top: '85%', left: '18%', size: 36, color: 'foreground', wave: 3 },
-    { top: '72%', left: '70%', size: 30, color: 'primary', wave: 3 },
-    { top: '95%', left: '32%', size: 26, color: 'foreground', wave: 3 },
-] as const;
-
 export function AboutSummaryV2() {
     const { t, isRTL } = useLanguage();
     const { colorScheme } = useTheme();
@@ -100,25 +59,6 @@ export function AboutSummaryV2() {
     });
     const imageY = useTransform(scrollYProgress, [0, 1], [30, -30]);
     const bgOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0.8]);
-
-    // Scroll-linked poetry animations
-    const poetryRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress: poetryProgress } = useScroll({
-        target: poetryRef,
-        offset: ['start end', 'end start'],
-    });
-    const poetryX1 = useTransform(poetryProgress, [0.15, 0.45], ['100vw', '0vw']);
-    const poetryOpacity1 = useTransform(poetryProgress, [0.15, 0.3], [0, 1]);
-    const poetryX2 = useTransform(poetryProgress, [0.35, 0.65], ['-100vw', '0vw']);
-    const poetryOpacity2 = useTransform(poetryProgress, [0.35, 0.5], [0, 1]);
-
-    // Stars — 3 waves synced with second hemistich (0.35 → 0.65)
-    const starsScale1 = useTransform(poetryProgress, [0.35, 0.55], [0, 1]);
-    const starsOpacity1 = useTransform(poetryProgress, [0.35, 0.50], [0, 1]);
-    const starsScale2 = useTransform(poetryProgress, [0.40, 0.60], [0, 1]);
-    const starsOpacity2 = useTransform(poetryProgress, [0.40, 0.55], [0, 1]);
-    const starsScale3 = useTransform(poetryProgress, [0.45, 0.65], [0, 1]);
-    const starsOpacity3 = useTransform(poetryProgress, [0.45, 0.60], [0, 1]);
 
     return (
         <section
@@ -301,83 +241,6 @@ export function AboutSummaryV2() {
                 </div>
             </div>
 
-            {/* ── Poetry Verse ── */}
-            <div ref={poetryRef} className="relative py-16 sm:py-24 lg:py-32 overflow-hidden" dir="rtl">
-                {/* Stars */}
-                {POETRY_STARS.map((star, i) => {
-                    const s = star.wave === 1
-                        ? { scale: starsScale1, opacity: starsOpacity1 }
-                        : star.wave === 2
-                            ? { scale: starsScale2, opacity: starsOpacity2 }
-                            : { scale: starsScale3, opacity: starsOpacity3 };
-                    return (
-                        <motion.svg
-                            key={i}
-                            className={`absolute pointer-events-none${i % 2 === 0 ? ' hidden lg:block' : ''}`}
-                            style={{
-                                top: star.top,
-                                left: star.left,
-                                width: `clamp(${Math.round(star.size * 0.45)}px, ${(star.size / 14).toFixed(1)}vw, ${star.size}px)`,
-                                height: `clamp(${Math.round(star.size * 0.45)}px, ${(star.size / 14).toFixed(1)}vw, ${star.size}px)`,
-                                scale: s.scale,
-                                opacity: s.opacity,
-                            }}
-                            viewBox="0 0 24 24"
-                            fill={star.color === 'primary' ? 'var(--primary)' : 'var(--foreground)'}
-                        >
-                            <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5Z" />
-                        </motion.svg>
-                    );
-                })}
-
-                <div className="flex flex-col items-center gap-4 sm:gap-6 lg:gap-8 w-full px-4">
-                    <motion.p
-                        className="font-bold text-center whitespace-nowrap select-none"
-                        style={{
-                            x: poetryX1,
-                            opacity: poetryOpacity1,
-                            fontFamily: 'var(--font-marhey)',
-                            fontSize: 'clamp(2rem, 6vw, 6rem)',
-                            color: 'var(--foreground)',
-                        }}
-                    >
-                        إذا غامرتَ في شرفٍ مرومِ
-                    </motion.p>
-
-                    <motion.div
-                        className="flex items-center gap-3"
-                        style={{ opacity: poetryOpacity2 }}
-                    >
-                        <div className="h-px w-12 sm:w-20" style={{ backgroundColor: 'var(--primary)' }} />
-                        <div className="w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--primary)' }} />
-                        <div className="h-px w-12 sm:w-20" style={{ backgroundColor: 'var(--primary)' }} />
-                    </motion.div>
-
-                    <motion.p
-                        className="font-bold text-center whitespace-nowrap select-none"
-                        style={{
-                            x: poetryX2,
-                            opacity: poetryOpacity2,
-                            fontFamily: 'var(--font-marhey)',
-                            fontSize: 'clamp(2rem, 6vw, 6rem)',
-                            color: 'var(--primary)',
-                        }}
-                    >
-                        فلا تقنعْ بما دونَ النجومِ
-                    </motion.p>
-
-                    <motion.span
-                        className="text-sm sm:text-base mt-4"
-                        style={{
-                            opacity: poetryOpacity2,
-                            color: 'var(--muted-foreground)',
-                            fontFamily: 'var(--font-marhey)',
-                        }}
-                    >
-                        — المتنبي
-                    </motion.span>
-                </div>
-            </div>
         </section>
     );
 }

@@ -37,6 +37,19 @@ export const BackgroundGradientAnimation = ({
   const interactiveRef = useRef<HTMLDivElement>(null);
   const curRef = useRef({ x: 0, y: 0 });
   const tgRef = useRef({ x: 0, y: 0 });
+  const isVisibleRef = useRef(true);
+
+  // Track visibility — pause all animation work when off-screen
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { isVisibleRef.current = entry.isIntersecting; },
+      { threshold: 0, rootMargin: '100px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -57,6 +70,8 @@ export const BackgroundGradientAnimation = ({
     if (!interactive) return;
     let rafId: number;
     function animate() {
+      rafId = requestAnimationFrame(animate);
+      if (!isVisibleRef.current) return;
       const cur = curRef.current;
       const tg = tgRef.current;
       cur.x += (tg.x - cur.x) / 20;
@@ -64,7 +79,6 @@ export const BackgroundGradientAnimation = ({
       if (interactiveRef.current) {
         interactiveRef.current.style.transform = `translate(${Math.round(cur.x)}px, ${Math.round(cur.y)}px)`;
       }
-      rafId = requestAnimationFrame(animate);
     }
     rafId = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(rafId);
@@ -111,7 +125,7 @@ export const BackgroundGradientAnimation = ({
         </defs>
       </svg>
       <div className={cn("relative z-10", className)}>{children}</div>
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden" style={{ contain: 'strict' }}>
         <div
           className={cn(
             "gradients-container h-full w-full blur-lg",
@@ -126,6 +140,7 @@ export const BackgroundGradientAnimation = ({
               `animate-first`,
               `opacity-100`
             )}
+            style={{ willChange: 'transform' }}
           ></div>
           <div
             className={cn(
@@ -135,6 +150,7 @@ export const BackgroundGradientAnimation = ({
               `animate-second`,
               `opacity-100`
             )}
+            style={{ willChange: 'transform' }}
           ></div>
           <div
             className={cn(
@@ -144,6 +160,7 @@ export const BackgroundGradientAnimation = ({
               `animate-third`,
               `opacity-100`
             )}
+            style={{ willChange: 'transform' }}
           ></div>
           {interactive && (
             <div
@@ -153,6 +170,7 @@ export const BackgroundGradientAnimation = ({
                 `[mix-blend-mode:var(--blending-value)] w-full h-full -top-1/2 -left-1/2`,
                 `opacity-70`
               )}
+              style={{ willChange: 'transform' }}
             ></div>
           )}
         </div>

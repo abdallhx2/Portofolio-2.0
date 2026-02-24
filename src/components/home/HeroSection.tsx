@@ -156,11 +156,11 @@ export function HeroSection({ personalInfo, language, isRTL, t }: HeroSectionPro
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.7, ease: easings.decelerate }}
             dir="ltr"
-            style={{ color: 'var(--primary)', textShadow: '0 4px 30px rgba(var(--primary-rgb), 0.25)', marginBottom: 'clamp(0rem, -3rem + 8vw, 7rem)' }}
+            style={{ color: 'var(--primary)', textShadow: '0 4px 30px rgba(var(--primary-rgb), 0.25)', marginBottom: 'clamp(0rem, -3rem + 6vw, 5rem)' }}
           >
             <MorphingText
               texts={helloTexts}
-              className="max-w-none w-full title-hero tracking-tight h-[clamp(11rem,6rem+10vw,17rem)]"
+              className="max-w-none w-full title-hero tracking-tight h-[clamp(8rem,5rem+8vw,14rem)]"
             />
           </motion.div>
 
@@ -170,7 +170,7 @@ export function HeroSection({ personalInfo, language, isRTL, t }: HeroSectionPro
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.35, duration: 0.7, ease: easings.decelerate }}
             className="font-bold tracking-tight"
-            style={{ color: 'var(--foreground)', fontFamily: 'var(--font-marhey)', fontSize: 'clamp(2.5rem, 1.5rem + 2.5vw, 3.75rem)' }}
+            style={{ color: 'var(--foreground)', fontFamily: 'var(--font-marhey)', fontSize: 'clamp(1.75rem, 1.25rem + 2vw, 3.25rem)' }}
           >
             {personalInfo.name}
           </motion.h2>
@@ -181,7 +181,7 @@ export function HeroSection({ personalInfo, language, isRTL, t }: HeroSectionPro
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.55, duration: 0.6, ease: easings.smooth }}
             className={`leading-relaxed max-w-2xl mx-auto ${isRTL ? 'font-arabic' : ''}`}
-            style={{ color: 'var(--muted-foreground)', fontSize: 'clamp(1.1rem, 0.9rem + 0.5vw, 1.25rem)' }}
+            style={{ color: 'var(--muted-foreground)', fontSize: 'clamp(0.85rem, 0.75rem + 0.4vw, 1.125rem)' }}
           >
             {language === 'ar'
               ? 'مهندس برمجيات سعودي خبير في تقنيات الذكاء الاصطناعي و النماذج اللغوية الكبيرة وتطبيقاتها في مختلف الأنظمة'
@@ -198,11 +198,11 @@ export function HeroSection({ personalInfo, language, isRTL, t }: HeroSectionPro
             >
               <LiquidGradientButton
                 onClick={() => openContactDialog()}
-                className="py-[clamp(1rem,0.8rem+0.5vw,1.25rem)] px-[clamp(2.5rem,2rem+1vw,3rem)]"
+                className="py-[clamp(0.65rem,0.55rem+0.4vw,1rem)] px-[clamp(1.5rem,1.25rem+0.8vw,2.5rem)]"
               >
-                <span className="flex items-center gap-3 font-semibold" style={{ fontSize: 'clamp(1rem, 0.9rem + 0.3vw, 1.125rem)' }}>
+                <span className="flex items-center gap-3 font-semibold" style={{ fontSize: 'clamp(0.8rem, 0.75rem + 0.25vw, 1rem)' }}>
                   <span>{t('home.hero.getInTouch') || 'خلّنا نتواصل'}</span>
-                  <ExternalLink className="w-[clamp(1.25rem,1rem+0.5vw,1.5rem)] h-[clamp(1.25rem,1rem+0.5vw,1.5rem)]" />
+                  <ExternalLink className="w-[clamp(0.95rem,0.8rem+0.4vw,1.25rem)] h-[clamp(0.95rem,0.8rem+0.4vw,1.25rem)]" />
                 </span>
               </LiquidGradientButton>
             </motion.div>
@@ -218,12 +218,12 @@ export function HeroSection({ personalInfo, language, isRTL, t }: HeroSectionPro
                     transition={{ delay, duration: 0.5, ...springs.gentle }}
                   >
                     <Link href={link} target="_blank" rel="noopener noreferrer"
-                      className="group flex items-center justify-center w-[clamp(2.75rem,2.5rem+0.5vw,3rem)] h-[clamp(2.75rem,2.5rem+0.5vw,3rem)] rounded-xl border transition-all duration-300 hover:scale-110 hover:-translate-y-1 hover:shadow-lg hover:border-transparent"
+                      className="group flex items-center justify-center w-[clamp(2.25rem,1.85rem+0.4vw,2.75rem)] h-[clamp(2.25rem,1.85rem+0.4vw,2.75rem)] rounded-xl border transition-all duration-300 hover:scale-110 hover:-translate-y-1 hover:shadow-lg hover:border-transparent"
                       style={{
                         borderColor: 'var(--primary)',
                         color: 'var(--muted-foreground)',
                       }}>
-                      <Icon className="w-[clamp(1.125rem,0.9rem+0.5vw,1.25rem)] h-[clamp(1.125rem,0.9rem+0.5vw,1.25rem)] transition-colors duration-300 group-hover:text-primary" />
+                      <Icon className="w-[clamp(0.875rem,0.7rem+0.4vw,1.125rem)] h-[clamp(0.875rem,0.7rem+0.4vw,1.125rem)] transition-colors duration-300 group-hover:text-primary" />
                     </Link>
                   </motion.div>
                 ) : null
