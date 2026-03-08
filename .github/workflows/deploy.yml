@@ -1,0 +1,29 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -e
+            cd /root/portofilo
+            git pull origin main
+            docker build -t portofilo-app .
+            docker stop portofilo 2>/dev/null || true
+            docker rm portofilo 2>/dev/null || true
+            docker run -d \
+              --name portofilo \
+              --restart unless-stopped \
+              -p 4000:3000 \
+              portofilo-app
+            docker image prune -f
