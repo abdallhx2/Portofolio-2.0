@@ -1,0 +1,5 @@
+[   45915ms] [WARNING] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. @ http://localhost:3001/_next/static/chunks/node_modules_1f9f7b27._.js:2942
+[   46034ms] [WARNING] Image with src "/me/2.jpeg" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3001/_next/static/chunks/node_modules_next_dist_0eb1e458._.js:1073
+[   46771ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3001/images/coming-soon.jpg:0
+[   81749ms] [WARNING] Deprecated API for given entry type. @ :8
+[   81749ms] [WARNING] Deprecated API for given entry type. @ :9

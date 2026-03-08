@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   experimental: {
     // Optimize for better performance on slow filesystems
     optimizePackageImports: ['lucide-react', '@heroicons/react', 'react-icons', 'three', '@react-three/drei', '@react-three/fiber', 'motion'],
