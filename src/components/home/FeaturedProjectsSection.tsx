@@ -58,7 +58,7 @@ export function FeaturedProjectsSection({ projects, t }: FeaturedProjectsSection
   if (!projects.length) return null;
 
   return (
-    <section className="section-unified" dir={isRTL ? 'rtl' : 'ltr'}>
+    <section className="section-unified overflow-x-clip" dir={isRTL ? 'rtl' : 'ltr'}>
       <div className="container-unified">
         <motion.div
           variants={sectionContentScale}

@@ -1,4 +1,6 @@
-import { useState, useEffect, useMemo } from 'react';
+'use client';
+
+import { useState, useEffect, useMemo, useRef } from 'react';
 import Link from 'next/link';
 import { motion } from 'motion/react';
 
@@ -11,6 +13,11 @@ import { MorphingText } from '@/registry/magicui/morphing-text';
 import { easings, springs, rtlX } from '@/lib/motion';
 import { useTheme } from '@/context/ThemeContext';
 import { useContactDialog } from '@/components/home/ContactDialog';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const helloTexts = [
   "Hello",      // English
@@ -72,6 +79,26 @@ export function HeroSection({ personalInfo, language, isRTL, t }: HeroSectionPro
   const { themeMode } = useTheme();
   const isDark = themeMode === 'dark';
   const [primaryColor, setPrimaryColor] = useState<string>('#7c3aed');
+  const heroRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const stripsRef = useRef<HTMLDivElement>(null);
+
+  // خروج ناعم للمحتوى مع التمرير بينما يغطي قسم "من أنا" الهيرو
+  useGSAP(() => {
+    const mm = gsap.matchMedia();
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      // قيم مطلقة لأن الهيرو sticky — قياس موضعه أثناء التمرير يعطي نتائج خاطئة
+      const trigger = {
+        start: 0,
+        end: () => heroRef.current?.offsetHeight ?? window.innerHeight,
+        scrub: true,
+        invalidateOnRefresh: true,
+      };
+      gsap.to(contentRef.current, { yPercent: -18, scale: 0.94, opacity: 0, ease: 'none', scrollTrigger: trigger });
+      gsap.to(stripsRef.current, { yPercent: 35, ease: 'none', scrollTrigger: trigger });
+    });
+    return () => mm.revert();
+  }, []);
 
   // Watch for theme changes and update primary color (debounced, no temp DOM elements)
   useEffect(() => {
@@ -143,12 +170,18 @@ export function HeroSection({ personalInfo, language, isRTL, t }: HeroSectionPro
       size="80%"
       blendingValue="hard-light"
       interactive={true}
-      containerClassName="!h-screen overflow-hidden md:overflow-visible md:sticky top-0 z-0"
-      className="relative h-full"
+      containerClassName="!h-auto min-h-[100svh] overflow-hidden md:sticky top-0 z-0"
+      className="relative flex min-h-[100svh] flex-col"
     >
-      {/* Main content - centered over full hero height */}
-      <div className="absolute inset-0 flex items-center justify-center z-10">
-        <div className="container-unified text-center space-y-4 md:space-y-8">
+      <div ref={heroRef} className="absolute inset-0 pointer-events-none" aria-hidden />
+
+      {/* Main content — يتوسط المساحة المتاحة فوق الشرائط ويتمدد في الشاشات القصيرة */}
+      <div
+        ref={contentRef}
+        className="relative z-10 flex flex-1 items-center justify-center will-change-transform"
+        style={{ paddingTop: 'clamp(5.5rem, 4rem + 4vh, 8rem)', paddingBottom: 'clamp(1rem, 0.5rem + 2vh, 2.5rem)' }}
+      >
+        <div className="container-unified text-center flex flex-col items-center" style={{ gap: 'clamp(0.75rem, 0.25rem + 1.6vh, 2rem)' }}>
 
           {/* Greeting */}
           <motion.div
@@ -156,11 +189,12 @@ export function HeroSection({ personalInfo, language, isRTL, t }: HeroSectionPro
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.7, ease: easings.decelerate }}
             dir="ltr"
-            style={{ color: 'var(--primary)', textShadow: '0 4px 30px rgba(var(--primary-rgb), 0.25)', marginBottom: 'clamp(0rem, -3rem + 6vw, 5rem)' }}
+            className="w-full"
+            style={{ color: 'var(--primary)', textShadow: '0 4px 30px rgba(var(--primary-rgb), 0.25)' }}
           >
             <MorphingText
               texts={helloTexts}
-              className="max-w-none w-full title-hero tracking-tight h-[clamp(8rem,5rem+8vw,14rem)]"
+              className="max-w-none w-full title-hero tracking-tight hero-morph"
             />
           </motion.div>
 
@@ -189,7 +223,7 @@ export function HeroSection({ personalInfo, language, isRTL, t }: HeroSectionPro
           </motion.p>
 
           {/* CTA & Social Links */}
-          <div className="flex flex-col sm:flex-row items-center justify-center pt-2 md:pt-6" style={{ gap: 'clamp(1rem, 0.75rem + 1.5vw, 2rem)' }}>
+          <div className="flex flex-col sm:flex-row items-center justify-center pt-2 md:pt-4" style={{ gap: 'clamp(1rem, 0.75rem + 1.5vw, 2rem)' }}>
             {/* CTA Button */}
             <motion.div
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -208,7 +242,7 @@ export function HeroSection({ personalInfo, language, isRTL, t }: HeroSectionPro
             </motion.div>
 
             {/* Social Links */}
-            <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
               {socialEntries.map(({ key, link, Icon, initial, delay }) =>
                 link ? (
                   <motion.div
@@ -235,12 +269,12 @@ export function HeroSection({ personalInfo, language, isRTL, t }: HeroSectionPro
 
       {/* Tech Stack Scroll Marquee - Crossed X Layout */}
       <div
-        className="absolute bottom-0 w-full z-0 overflow-hidden pointer-events-none"
-        style={{ transform: 'translateY(clamp(-1rem, -0.5rem - 1vw, -0.75rem))' }}
+        ref={stripsRef}
+        className="relative w-full shrink-0 z-0 pointer-events-none"
       >
         <div
           className="relative w-full"
-          style={{ height: 'clamp(14rem, 8rem + 10vw, 22rem)', clipPath: 'inset(-50% 0px)' }}
+          style={{ height: 'clamp(7.5rem, 4rem + 9vw, 15rem)', clipPath: 'inset(-50% 0px)' }}
           dir="ltr"
         >
           <div className="absolute inset-0 flex items-center justify-center">
@@ -250,7 +284,7 @@ export function HeroSection({ personalInfo, language, isRTL, t }: HeroSectionPro
               initial={{ opacity: 0, x: rtlX(-80, isRTL) }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 1.1, duration: 0.6, ease: easings.decelerate }}
-              className="absolute w-[120%] transform rotate-6 border-foreground shadow-sm z-10 origin-center"
+              className="absolute w-[120%] transform rotate-[4deg] md:rotate-6 border-foreground shadow-sm z-10 origin-center"
               style={{
                 backgroundColor: 'var(--card)',
                 padding: 'clamp(0.5rem, 0.2rem + 0.6vw, 1rem) 0',
@@ -274,7 +308,7 @@ export function HeroSection({ personalInfo, language, isRTL, t }: HeroSectionPro
               initial={{ opacity: 0, x: rtlX(80, isRTL) }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 1.3, duration: 0.6, ease: easings.decelerate }}
-              className="absolute w-[120%] transform -rotate-6 border-foreground shadow-sm z-20 origin-center"
+              className="absolute w-[120%] transform -rotate-[4deg] md:-rotate-6 border-foreground shadow-sm z-20 origin-center"
               style={{
                 backgroundColor: 'var(--card)',
                 padding: 'clamp(0.5rem, 0.2rem + 0.6vw, 1rem) 0',

@@ -2,154 +2,122 @@
 
 import { useRef, forwardRef } from 'react';
 import dynamic from 'next/dynamic';
-import { motion } from 'motion/react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import { useLanguage } from '@/context/LanguageContext';
 import { AnimatedBeam } from '@/components/ui/animated-beam';
 import { AuroraBackground } from '@/components/ui/aurora-background';
-import { sectionViewport, sectionHeader } from '@/lib/motion';
-// Heavy components loaded lazily — saves ~500KB from initial bundle
-const Globe = dynamic(() => import('@/components/ui/globe').then(m => m.Globe), {
-  ssr: false,
-  loading: () => <div className="w-full h-full flex items-center justify-center"><div className="w-16 h-16 rounded-full border-2 animate-pulse" style={{ borderColor: 'var(--border)' }} /></div>,
-});
+// Heavy component loaded lazily
 const OrbitRotation = dynamic(() => import('@/components/ui/orbit-rotation').then(m => m.OrbitRotation), {
   ssr: false,
   loading: () => <div className="w-full h-full flex items-center justify-center"><div className="w-16 h-16 rounded-full border-2 animate-pulse" style={{ borderColor: 'var(--border)' }} /></div>,
 });
-const ThreeDMarquee = dynamic(() => import('@/components/ui/three-d-marquee').then(m => m.ThreeDMarquee), {
-  ssr: false,
-  loading: () => <div className="w-full h-full" style={{ backgroundColor: 'var(--background)' }} />,
-});
-import { Smartphone } from 'lucide-react';
+import { MonitorSmartphone, FileText, Database, Mic, Sparkles, CalendarCheck } from 'lucide-react';
 import {
   SiFlutter,
   SiReact,
-  SiPython,
+  SiNextdotjs,
+  SiTypescript,
   SiFirebase,
-  SiDart,
+  SiTailwindcss,
   SiAndroid,
   SiApple,
-  SiKotlin,
   SiSwift,
+  SiNodedotjs,
+  SiSupabase,
+  SiVercel,
   SiWhatsapp,
   SiTelegram,
   SiPostgresql,
   SiGithub,
   SiSlack,
   SiNotion,
-  SiGoogle,
-  SiXcode,
 } from 'react-icons/si';
 import { cn } from '@/lib/utils';
 
+gsap.registerPlugin(ScrollTrigger, useGSAP);
+
 /* ─── بيانات الخدمات ─── */
-interface BentoServiceData {
-  id: string;
-  en: { title: string; description: string };
-  ar: { title: string; description: string };
-}
+type ServiceId = 'ai-agents' | 'web-mobile' | 'rag' | 'voice';
 
-const BENTO_SERVICES: BentoServiceData[] = [
-  {
-    id: 'ai-systems',
+const BENTO_SERVICES: Record<ServiceId, { en: { title: string; description: string }; ar: { title: string; description: string } }> = {
+  'ai-agents': {
     en: {
-      title: 'AI & Agent Systems Engineering',
+      title: 'AI Agents & Automation',
       description:
-        'Designing intelligent agent architectures, LLM orchestration, and autonomous workflows that think, decide, and act.',
+        'Designing intelligent agent architectures, LLM orchestration, and autonomous workflows that connect your tools — they think, decide, and act.',
     },
     ar: {
-      title: 'هندسة أنظمة الذكاء الاصطناعي والوكلاء',
+      title: 'وكلاء الذكاء الاصطناعي والأتمتة',
       description:
-        'تصميم بنى وكلاء ذكية، تنسيق النماذج اللغوية الكبيرة، وسير عمل مستقل يفكر ويقرر وينفذ.',
+        'تصميم بنى وكلاء ذكية وتنسيق النماذج اللغوية وسير عمل مستقل يربط أدواتك ببعض — يفكر ويقرر وينفذ.',
     },
   },
-  {
-    id: 'web-dev',
+  'web-mobile': {
     en: {
-      title: 'Web Development',
+      title: 'Web & Mobile Development',
       description:
-        'Full-stack Next.js & React applications with TypeScript, responsive design, and performance-first architecture.',
+        'Full-stack Next.js platforms and cross-platform Flutter apps — one codebase mindset, responsive UI, and performance-first architecture.',
     },
     ar: {
-      title: 'تطوير الويب',
+      title: 'تطوير الويب والجوال',
       description:
-        'تطبيقات Full-stack بـ Next.js و React مع TypeScript، تصميم متجاوب وأداء عالي.',
+        'منصات Full-stack بـ Next.js وتطبيقات Flutter متعددة المنصات — واجهات متجاوبة وبنية تضع الأداء أولاً.',
     },
   },
-  {
-    id: 'ui-ux',
+  rag: {
     en: {
-      title: 'UI/UX Design',
+      title: 'LLM Apps & Knowledge Assistants',
       description:
-        'User-centered design with modern aesthetics, prototyping, and seamless user experience.',
+        'RAG-powered assistants that answer from your own documents and data — accurate, cited, and integrated into your product.',
     },
     ar: {
-      title: 'تصميم واجهات وتجربة المستخدم',
+      title: 'تطبيقات LLM ومساعدات المعرفة',
       description:
-        'تصميم محوره المستخدم مع جماليات حديثة ونمذجة أولية وتجربة استخدام سلسة.',
+        'مساعدات مبنية على RAG تجاوب من مستنداتك وبياناتك الخاصة — بدقة ومع ذكر المصدر، ومدمجة داخل منتجك.',
     },
   },
-  {
-    id: 'mobile-dev',
+  voice: {
     en: {
-      title: 'Mobile App Development',
+      title: 'Voice AI & Conversational Agents',
       description:
-        'Cross-platform Flutter apps with native performance, beautiful UI, and seamless API integration.',
+        'Real-time voice and chat agents that understand Arabic & English, take actions through your systems, and serve customers 24/7.',
     },
     ar: {
-      title: 'تطوير تطبيقات الجوال',
+      title: 'الذكاء الاصطناعي الصوتي والمحادثة',
       description:
-        'تطبيقات Flutter متعددة المنصات بأداء محلي وواجهات جميلة وتكامل سلس مع APIs.',
+        'وكلاء صوت ومحادثة لحظيين يفهمون العربية والإنجليزية، ينفذون مهام عبر أنظمتك، ويخدمون عملاءك على مدار الساعة.',
     },
   },
-];
+};
 
-/* ─── صور 3D Marquee ─── */
-const MARQUEE_IMAGES = [
-  '/project/fruit/1.png',
-  '/project/zahab/1.jpg',
-  '/project/rassem/1.jpg',
-  '/project/cv/1.png',
-  '/project/efficiency-tools/1.png',
-  '/project/zahab/5.jpg',
-  '/project/fruit/2.png',
-  '/project/zahab/2.jpg',
-  '/project/rassem/2.jpg',
-  '/project/cv/2.png',
-  '/project/efficiency-tools/2.png',
-  '/project/zahab/6.jpg',
-  '/project/fruit/3.png',
-  '/project/zahab/3.jpg',
-  '/project/rassem/3.jpg',
-  '/project/cv/3.png',
-  '/project/efficiency-tools/3.png',
-  '/project/zahab/7.jpg',
-  '/project/fruit/4.png',
-  '/project/zahab/4.jpg',
-  '/project/rassem/4.jpg',
-  '/project/cv/4.png',
-  '/project/efficiency-tools/4.png',
-  '/project/zahab/8.jpg',
-  '/project/cv/5.png',
-  '/project/efficiency-tools/main.png',
-  '/project/fruit/1.png',
-  '/project/rassem/1.jpg',
-];
-
-/* ─── أيقونات OrbitRotation لتطوير الجوال ─── */
-const MOBILE_ICONS = [
+/* ─── أيقونات OrbitRotation للويب والجوال ─── */
+const WEB_MOBILE_ICONS = [
+  { Icon: SiNextdotjs, name: 'Next.js' },
   { Icon: SiFlutter, name: 'Flutter' },
-  { Icon: SiReact, name: 'React Native' },
-  { Icon: SiDart, name: 'Dart' },
-  { Icon: SiFirebase, name: 'Firebase' },
-  { Icon: SiPython, name: 'Python' },
+  { Icon: SiReact, name: 'React' },
+  { Icon: SiTypescript, name: 'TypeScript' },
+  { Icon: SiApple, name: 'iOS' },
   { Icon: SiAndroid, name: 'Android' },
-  { Icon: SiApple, name: 'Apple' },
-  { Icon: SiKotlin, name: 'Kotlin' },
+  { Icon: SiTailwindcss, name: 'Tailwind' },
+  { Icon: SiFirebase, name: 'Firebase' },
+  { Icon: SiNodedotjs, name: 'Node.js' },
   { Icon: SiSwift, name: 'Swift' },
-  { Icon: SiGoogle, name: 'Google Play' },
-  { Icon: SiXcode, name: 'Xcode' },
+  { Icon: SiSupabase, name: 'Supabase' },
+  { Icon: SiVercel, name: 'Vercel' },
 ];
+
+/** يشغل الأنيميشن المتكررة فقط وهي ظاهرة بالشاشة */
+function playWhileVisible(tl: gsap.core.Animation, trigger: Element | null) {
+  if (!trigger) return;
+  ScrollTrigger.create({
+    trigger,
+    start: 'top bottom',
+    end: 'bottom top',
+    onToggle: (self) => (self.isActive ? tl.play() : tl.pause()),
+  });
+}
 
 /* ─── عقدة دائرية للـ Beam ─── */
 const BeamNode = forwardRef<
@@ -243,6 +211,225 @@ function AIBeamDemo() {
   );
 }
 
+/* ─── مساعد المعرفة (RAG): سؤال ← استرجاع ← إجابة بمصادر ─── */
+const RAG_COPY = {
+  en: {
+    q: 'What is our refund policy for annual plans?',
+    a: 'Annual plans are refundable within 30 days of purchase, prorated after that.',
+    docs: ['Policies.pdf', 'Billing DB'],
+    searching: 'Searching knowledge base…',
+  },
+  ar: {
+    q: 'وش سياسة الاسترجاع للباقات السنوية؟',
+    a: 'الباقات السنوية قابلة للاسترجاع خلال ٣٠ يوم من الشراء، وبعدها يكون الاسترداد نسبي.',
+    docs: ['السياسات.pdf', 'قاعدة الفوترة'],
+    searching: 'جاري البحث في قاعدة المعرفة…',
+  },
+};
+
+function RagChatDemo({ language, isRTL }: { language: 'en' | 'ar'; isRTL: boolean }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const copy = RAG_COPY[language];
+
+  useGSAP(
+    () => {
+      const q = gsap.utils.selector(ref);
+      const answer = q<HTMLElement>('[data-answer]')[0];
+      const typed = { n: 0 };
+      const full = copy.a;
+
+      const tl = gsap.timeline({ repeat: -1, repeatDelay: 1.6, paused: true });
+      tl.set(q('[data-bubble], [data-doc], [data-cite], [data-searching]'), { opacity: 0, y: 10 })
+        .set(answer, { textContent: '' })
+        .set(typed, { n: 0 })
+        .to(q('[data-bubble="user"]'), { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' })
+        .to(q('[data-searching]'), { opacity: 1, y: 0, duration: 0.3 }, '+=0.2')
+        .to(q('[data-doc]'), { opacity: 1, y: 0, duration: 0.35, stagger: 0.18, ease: 'back.out(2)' })
+        .to(q('[data-searching]'), { opacity: 0, duration: 0.25 }, '+=0.3')
+        .to(q('[data-bubble="ai"]'), { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' })
+        .to(typed, {
+          n: full.length,
+          duration: full.length * 0.028,
+          ease: 'none',
+          onUpdate: () => {
+            answer.textContent = full.slice(0, Math.round(typed.n));
+          },
+        })
+        .to(q('[data-cite]'), { opacity: 1, y: 0, duration: 0.3, stagger: 0.12 });
+
+      playWhileVisible(tl, ref.current);
+    },
+    { scope: ref, dependencies: [language], revertOnUpdate: true }
+  );
+
+  const bubbleBase = 'max-w-[88%] rounded-2xl px-3.5 py-2.5 text-[13px] leading-relaxed shadow-sm';
+
+  return (
+    <div ref={ref} className="flex h-full w-full flex-col justify-center gap-2.5 px-5 pt-5" dir={isRTL ? 'rtl' : 'ltr'}>
+      <div
+        data-bubble="user"
+        className={cn(bubbleBase, 'self-end')}
+        style={{ backgroundColor: 'var(--primary)', color: '#fff' }}
+      >
+        {copy.q}
+      </div>
+
+      <div className="flex flex-wrap items-center gap-1.5 min-h-[26px]">
+        <span data-searching className="inline-flex items-center gap-1.5 text-[11px]" style={{ color: 'var(--muted-foreground)' }}>
+          <Sparkles className="w-3.5 h-3.5 animate-pulse" style={{ color: 'var(--primary)' }} />
+          {copy.searching}
+        </span>
+        {copy.docs.map((d, i) => (
+          <span
+            key={d}
+            data-doc
+            className="inline-flex items-center gap-1 rounded-md border px-2 py-0.5 text-[11px]"
+            style={{ borderColor: 'var(--border)', backgroundColor: 'var(--card)', color: 'var(--muted-foreground)' }}
+          >
+            {i === 0 ? <FileText className="w-3 h-3" /> : <Database className="w-3 h-3" />}
+            {d}
+          </span>
+        ))}
+      </div>
+
+      <div
+        data-bubble="ai"
+        className={cn(bubbleBase, 'self-start border')}
+        style={{ backgroundColor: 'var(--card)', borderColor: 'var(--border)', color: 'var(--foreground)' }}
+      >
+        <span data-answer className="min-h-[1.5em] inline">{copy.a}</span>
+        <span className="mt-1.5 flex gap-1">
+          {[1, 2].map((n) => (
+            <span
+              key={n}
+              data-cite
+              className="inline-flex h-4 min-w-4 items-center justify-center rounded px-1 text-[10px] font-semibold"
+              style={{ backgroundColor: 'color-mix(in srgb, var(--primary) 18%, transparent)', color: 'var(--primary)' }}
+            >
+              {n}
+            </span>
+          ))}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/* ─── وكيل صوتي: موجة صوت + نص المحادثة + تنفيذ مهمة ─── */
+const VOICE_COPY = {
+  en: {
+    user: 'Book me an appointment tomorrow at 4 PM.',
+    agent: 'Done! You’re booked for tomorrow at 4:00 PM — I sent the confirmation by WhatsApp.',
+    tool: 'calendar.create_event',
+    live: 'Live',
+  },
+  ar: {
+    user: 'أبغى أحجز موعد بكرة الساعة ٤ العصر.',
+    agent: 'تم! حجزت لك بكرة الساعة ٤:٠٠ العصر، وأرسلت لك التأكيد على الواتساب.',
+    tool: 'calendar.create_event',
+    live: 'مباشر',
+  },
+};
+
+const BAR_COUNT = 36;
+
+function VoiceAgentDemo({ language, isRTL }: { language: 'en' | 'ar'; isRTL: boolean }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const copy = VOICE_COPY[language];
+
+  useGSAP(
+    () => {
+      const q = gsap.utils.selector(ref);
+      const bars = q('[data-bar]');
+
+      // الموجة: كل عمود يتذبذب بارتفاع عشوائي — تشتغل بس وهي ظاهرة
+      const wave = gsap.to(bars, {
+        paused: true,
+        scaleY: () => gsap.utils.random(0.15, 1),
+        duration: 0.28,
+        ease: 'sine.inOut',
+        stagger: { each: 0.02, from: 'center', repeat: -1, yoyo: true, repeatRefresh: true },
+      });
+
+      const tl = gsap.timeline({ repeat: -1, repeatDelay: 1.8, paused: true });
+      tl.set(q('[data-line]'), { opacity: 0, y: 12 })
+        .to(q('[data-ring]'), { scale: 1.6, opacity: 0, duration: 1.4, stagger: 0.45, repeat: 2, ease: 'power1.out' }, 0)
+        .to(q('[data-line="user"]'), { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }, 0.5)
+        .to(q('[data-line="tool"]'), { opacity: 1, y: 0, duration: 0.35, ease: 'back.out(2)' }, '+=0.6')
+        .to(q('[data-line="agent"]'), { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }, '+=0.6')
+        .to({}, { duration: 2.2 });
+
+      playWhileVisible(wave, ref.current);
+      playWhileVisible(tl, ref.current);
+    },
+    { scope: ref, dependencies: [language], revertOnUpdate: true }
+  );
+
+  return (
+    <div
+      ref={ref}
+      className="grid h-full w-full grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] items-center gap-5 sm:gap-8 px-5 sm:px-8 pt-6"
+      dir={isRTL ? 'rtl' : 'ltr'}
+    >
+      {/* الميكروفون + الموجة */}
+      <div className="flex items-center gap-4 min-w-0">
+        <div className="relative shrink-0 flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16">
+          {[0, 1].map((i) => (
+            <span
+              key={i}
+              data-ring
+              className="absolute inset-0 rounded-full border-2"
+              style={{ borderColor: 'var(--primary)' }}
+            />
+          ))}
+          <span
+            className="relative z-10 flex items-center justify-center w-full h-full rounded-full shadow-lg"
+            style={{ backgroundColor: 'var(--primary)', color: '#fff' }}
+          >
+            <Mic className="w-6 h-6" />
+          </span>
+        </div>
+        <div className="flex h-16 sm:h-20 flex-1 items-center justify-between gap-[2px] min-w-0" dir="ltr" aria-hidden>
+          {Array.from({ length: BAR_COUNT }).map((_, i) => (
+            <span
+              key={i}
+              data-bar
+              className="w-[3px] sm:w-1 h-full rounded-full origin-center"
+              style={{
+                transform: `scaleY(${0.2 + 0.6 * Math.abs(Math.sin(i * 0.7))})`,
+                backgroundColor: i % 3 === 0 ? 'var(--primary)' : 'color-mix(in srgb, var(--foreground) 55%, transparent)',
+              }}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* نص المحادثة */}
+      <div className="flex flex-col gap-2 min-w-0">
+        <span className="inline-flex items-center gap-1.5 self-start text-[11px] font-medium" style={{ color: 'var(--muted-foreground)' }}>
+          <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+          {copy.live}
+        </span>
+        <p data-line="user" className="text-[13px] leading-relaxed" style={{ color: 'var(--muted-foreground)' }}>
+          “{copy.user}”
+        </p>
+        <span
+          data-line="tool"
+          className="inline-flex items-center gap-1.5 self-start rounded-md border px-2 py-1 font-mono text-[11px]"
+          style={{ borderColor: 'var(--border)', backgroundColor: 'var(--card)', color: 'var(--muted-foreground)' }}
+          dir="ltr"
+        >
+          <CalendarCheck className="w-3.5 h-3.5" style={{ color: 'var(--primary)' }} />
+          {copy.tool} ✓
+        </span>
+        <p data-line="agent" className="text-[13px] sm:text-sm font-medium leading-relaxed" style={{ color: 'var(--foreground)' }}>
+          {copy.agent}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 /* ─── بطاقة Bento عامة ─── */
 function BentoCard({
   title,
@@ -250,22 +437,21 @@ function BentoCard({
   children,
   className = '',
   isRTL,
-  allowOverflow = false,
 }: {
   title: string;
   description: string;
   children: React.ReactNode;
   className?: string;
   isRTL: boolean;
-  allowOverflow?: boolean;
 }) {
   return (
     <div
-      className={`group flex flex-col backdrop-blur-xl ${allowOverflow ? '' : 'overflow-hidden'} ${className}`}
+      data-bento-card
+      className={`group flex flex-col backdrop-blur-xl overflow-hidden ${className}`}
       style={{ backgroundColor: 'color-mix(in srgb, var(--background) 35%, transparent)' }}
     >
       {/* المكون التفاعلي */}
-      <div className={`flex-1 min-h-0 relative ${allowOverflow ? 'overflow-visible' : ''}`}>
+      <div className="flex-1 min-h-[220px] relative">
         {children}
       </div>
 
@@ -295,92 +481,110 @@ function BentoCard({
 /* ─── المكون الرئيسي ─── */
 export function ServicesBento() {
   const { isRTL, language } = useLanguage();
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const svc = (id: ServiceId) => BENTO_SERVICES[id][language];
+
+  // دخول العنوان والبطاقات بالتتابع مع التمرير
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        const q = gsap.utils.selector(sectionRef);
+        gsap.from(q('[data-services-title]'), {
+          y: 40,
+          opacity: 0,
+          duration: 0.9,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' },
+        });
+        gsap.from(q('[data-bento-card]'), {
+          y: 60,
+          opacity: 0,
+          duration: 0.9,
+          stagger: 0.12,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: q('[data-bento-grid]')[0], start: 'top 85%' },
+        });
+      });
+      return () => mm.revert();
+    },
+    { scope: sectionRef }
+  );
+
+  const cardHeight = 'min-h-[360px] sm:min-h-0 sm:h-[370px] lg:h-[400px]';
 
   return (
     <AuroraBackground
       className="w-full py-[clamp(5rem,3rem+4vw,7rem)]"
       showRadialGradient={false}
     >
-      <div className="relative z-10 flex flex-col items-center justify-center" dir={isRTL ? 'rtl' : 'ltr'}>
+      <div ref={sectionRef} className="relative z-10 flex flex-col items-center justify-center" dir={isRTL ? 'rtl' : 'ltr'}>
         <div className="container-unified">
 
           {/* Section Header */}
-          <motion.div
-            variants={sectionHeader}
-            initial="hidden"
-            whileInView="visible"
-            viewport={sectionViewport}
-            className="text-center" style={{ marginBottom: 'clamp(2rem, 1.5rem + 1.5vw, 3rem)' }}
-          >
+          <div data-services-title className="text-center" style={{ marginBottom: 'clamp(2rem, 1.5rem + 1.5vw, 3rem)' }}>
             <h2 className="title-section" style={{ color: 'var(--foreground)' }}>
               {language === 'ar'
                 ? <>ما <span style={{ color: 'var(--primary)' }}>الخدمات</span> التي أقدمها؟</>
                 : <>What <span style={{ color: 'var(--primary)' }}>Services</span> Do I Offer?</>
               }
             </h2>
-          </motion.div>
+          </div>
 
           {/* Section Content - Bento Grid */}
           <div
+            data-bento-grid
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[4px] rounded-2xl overflow-hidden"
             style={{ backgroundColor: 'color-mix(in srgb, var(--foreground) 15%, transparent)' }}
           >
-            {/* 1. AI & Agent Systems — كبير col-span-2 */}
+            {/* 1. AI Agents & Automation — عريض */}
             <BentoCard
-              title={BENTO_SERVICES[0][language].title}
-              description={BENTO_SERVICES[0][language].description}
-              className="md:col-span-2 h-[280px] sm:h-[350px] lg:h-[400px]"
+              title={svc('ai-agents').title}
+              description={svc('ai-agents').description}
+              className={`md:col-span-2 ${cardHeight}`}
               isRTL={isRTL}
             >
               <AIBeamDemo />
             </BentoCard>
 
-            {/* 2. Web Development — طويل */}
+            {/* 2. Web & Mobile — مدمج */}
             <BentoCard
-              title={BENTO_SERVICES[1][language].title}
-              description={BENTO_SERVICES[1][language].description}
-              className="h-[280px] sm:h-[350px] lg:h-[400px]"
-              isRTL={isRTL}
-              allowOverflow={true}
-            >
-              <div className="w-full h-full flex items-start justify-start overflow-hidden pt-4 pl-4" dir="ltr">
-                <Globe size={700} />
-              </div>
-            </BentoCard>
-
-            {/* 3. Mobile App Development — عادي */}
-            <BentoCard
-              title={BENTO_SERVICES[3][language].title}
-              description={BENTO_SERVICES[3][language].description}
-              className="h-[280px] sm:h-[350px] lg:h-[400px]"
+              title={svc('web-mobile').title}
+              description={svc('web-mobile').description}
+              className={cardHeight}
               isRTL={isRTL}
             >
-              <div className="w-full h-full flex items-start justify-start overflow-hidden pt-4 pl-20">
-                <OrbitRotation
-                  icons={MOBILE_ICONS}
-                  orbitCount={3}
-                  orbitGap={8}
-                  centerIcon={{ Icon: Smartphone, name: 'Mobile' }}
-                  size="xl"
-                />
-              </div>
-            </BentoCard>
-
-            {/* 4. UI/UX Design — عريض col-span-2 */}
-            <BentoCard
-              title={BENTO_SERVICES[2][language].title}
-              description={BENTO_SERVICES[2][language].description}
-              className="md:col-span-2 h-[280px] sm:h-[350px] lg:h-[400px]"
-              isRTL={isRTL}
-            >
-              <div className="w-full h-full flex items-center justify-center" style={{ padding: '0 clamp(2rem, 1rem + 2.5vw, 4rem)' }}>
-                <div className="w-full max-w-[600px] lg:max-w-[800px] h-full">
-                  <ThreeDMarquee
-                    images={MARQUEE_IMAGES}
-                    className="h-full"
+              <div className="absolute inset-0 flex items-center justify-center overflow-hidden" dir="ltr">
+                <div className="scale-[0.72] sm:scale-[0.8] lg:scale-90">
+                  <OrbitRotation
+                    icons={WEB_MOBILE_ICONS}
+                    orbitCount={2}
+                    orbitGap={8}
+                    centerIcon={{ Icon: MonitorSmartphone, name: 'Web & Mobile' }}
+                    size="xl"
                   />
                 </div>
               </div>
+            </BentoCard>
+
+            {/* 3. LLM Apps & RAG */}
+            <BentoCard
+              title={svc('rag').title}
+              description={svc('rag').description}
+              className={cardHeight}
+              isRTL={isRTL}
+            >
+              <RagChatDemo language={language} isRTL={isRTL} />
+            </BentoCard>
+
+            {/* 4. Voice AI — عريض */}
+            <BentoCard
+              title={svc('voice').title}
+              description={svc('voice').description}
+              className={`md:col-span-2 ${cardHeight}`}
+              isRTL={isRTL}
+            >
+              <VoiceAgentDemo language={language} isRTL={isRTL} />
             </BentoCard>
           </div>
         </div>
