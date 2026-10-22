@@ -7,6 +7,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import ClientThemeProvider from "@/components/ClientThemeProvider";
 import LayoutWrapper from "@/components/LayoutWrapper";
+import SmoothScroll from "@/components/scroll/SmoothScroll";
 import { SidebarProvider } from "@/context/SidebarContext";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -95,6 +96,7 @@ export default function RootLayout({
         <ClientThemeProvider>
           <Analytics/>
           <LanguageLoadingScreen />
+          <SmoothScroll>
           <SidebarProvider>
             <LayoutWrapper>
               <div className="min-h-screen w-full">
@@ -108,6 +110,7 @@ export default function RootLayout({
             </LayoutWrapper>
           </SidebarProvider>
           <ScrollToTop />
+          </SmoothScroll>
         </ClientThemeProvider>
       </body>
     </html>

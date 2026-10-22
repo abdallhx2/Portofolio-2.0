@@ -10,7 +10,6 @@ import {
   AboutSummaryV2,
   ServicesBento,
   ContactDialogProvider,
-  PoetryScrollSection,
 } from '@/components/home';
 
 export default function Home() {
@@ -29,13 +28,10 @@ export default function Home() {
           t={t}
         />
 
-        {/* About Me - Story Section */}
+        {/* About Me - Story Section (GSAP pinned on large screens) */}
         <AboutSummaryV2 />
 
-        {/* Poetry Verse - Full Page */}
-        <PoetryScrollSection />
-
-        {/* Everything after About — single wrapper scrolls over the sticky About */}
+        {/* Everything after About */}
         <div className="relative z-20 rounded-t-3xl" style={{ backgroundColor: 'var(--section-bg)' }}>
           <ServicesBento />
 

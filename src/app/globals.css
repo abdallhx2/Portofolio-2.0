@@ -212,6 +212,19 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Lenis يتحكم بالتمرير — نوقف السلوك الافتراضي لتجنب التعارض */
+html.lenis-active {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
 body {
   font-family: var(--font-sans);
   line-height: 1.6;
@@ -320,6 +333,18 @@ body {
   font-weight: 900;
   line-height: 1;
   letter-spacing: -0.02em;
+}
+
+.hero-morph {
+  height: clamp(5.5rem, 1rem + 15vw, 13rem);
+}
+
+/* شاشات قصيرة (جوال بالعرض / لابتوب صغير) — نصغّر التحية حتى ما تزاحم بقية الهيرو */
+@media (max-height: 640px) {
+  .hero-morph.title-hero {
+    font-size: clamp(3.5rem, 2rem + 9vh, 6rem);
+    height: clamp(4rem, 2.5rem + 10vh, 7rem);
+  }
 }
 
 .title-section {

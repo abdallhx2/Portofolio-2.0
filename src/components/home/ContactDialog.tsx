@@ -1,10 +1,11 @@
 'use client';
 
-import { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, CheckCircle, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTranslatedData } from '@/hooks/useTranslatedData';
+import { useLenis } from '@/components/scroll/SmoothScroll';
 import {
   Dialog,
   DialogContent,
@@ -34,6 +35,14 @@ export function ContactDialogProvider({ children }: { children: React.ReactNode 
   const [isOpen, setIsOpen] = useState(false);
   const open = useCallback(() => setIsOpen(true), []);
   const close = useCallback(() => setIsOpen(false), []);
+  const lenis = useLenis();
+
+  // إيقاف التمرير الناعم للصفحة أثناء فتح النافذة
+  useEffect(() => {
+    if (!lenis) return;
+    if (isOpen) lenis.stop();
+    else lenis.start();
+  }, [isOpen, lenis]);
 
   return (
     <ContactDialogContext.Provider value={{ isOpen, open, close }}>

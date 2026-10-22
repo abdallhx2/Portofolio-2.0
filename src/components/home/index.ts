@@ -14,4 +14,3 @@ export { WorldMapSection } from './WorldMapSection';
 export { ServicesBento } from './ServicesBento';
 export { AboutStatistics } from './AboutStatistics';
 export { FeaturedProjectsSection } from './FeaturedProjectsSection';
-export { PoetryScrollSection } from './PoetryScrollSection';

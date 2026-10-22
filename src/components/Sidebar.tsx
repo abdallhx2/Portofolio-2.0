@@ -74,6 +74,7 @@ export default function Sidebar() {
 
       {/* Sidebar - Always positioned on left */}
       <div
+        data-lenis-prevent
         className={`fixed top-0 left-0 h-full z-50 transition-all duration-500 ease-out overflow-y-auto shadow-2xl lg:shadow-none border-r ${isMobileMenuOpen
           ? 'transform translate-x-0 opacity-100 w-64 sm:w-72 lg:w-80 xl:w-84 2xl:w-96'
           : 'transform -translate-x-full opacity-0 lg:translate-x-0 lg:opacity-100'

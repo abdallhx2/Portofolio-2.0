@@ -2,9 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { ChevronUp } from 'lucide-react';
+import { useLenis } from '@/components/scroll/SmoothScroll';
 
 export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
+  const lenis = useLenis();
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -16,7 +18,8 @@ export default function ScrollToTop() {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (lenis) lenis.scrollTo(0, { duration: 1.4 });
+    else window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   if (!isVisible) return null;
