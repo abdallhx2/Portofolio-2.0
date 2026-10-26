@@ -10,6 +10,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useTheme } from '@/context/ThemeContext';
 import { getColorScheme } from '@/data/colors';
 import { useTranslatedData } from '@/hooks/useTranslatedData';
+import AnimatedFrameworks from '@/components/ui/animated-frameworks';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -101,8 +102,8 @@ export function AboutSummaryV2() {
 
             mm.add(
                 {
-                    pinned: '(min-width: 1024px) and (min-height: 720px) and (prefers-reduced-motion: no-preference)',
-                    flow: '(max-width: 1023px) and (prefers-reduced-motion: no-preference), (max-height: 719px) and (prefers-reduced-motion: no-preference)',
+                    pinned: '(min-width: 1024px) and (min-height: 860px) and (prefers-reduced-motion: no-preference)',
+                    flow: '(max-width: 1023px) and (prefers-reduced-motion: no-preference), (max-height: 859px) and (prefers-reduced-motion: no-preference)',
                 },
                 (ctx) => {
                     const { pinned } = ctx.conditions as { pinned: boolean; flow: boolean };
@@ -110,9 +111,9 @@ export function AboutSummaryV2() {
                     // كشف الصورة: قناع يفتح من الأسفل مع تصغير خفيف
                     gsap.fromTo(
                         image,
-                        { clipPath: 'inset(100% 0% 0% 0% round 1.5rem)' },
+                        { clipPath: 'inset(100% 0% 0% 0% round 2rem)' },
                         {
-                            clipPath: 'inset(0% 0% 0% 0% round 1.5rem)',
+                            clipPath: 'inset(0% 0% 0% 0% round 2rem)',
                             ease: 'none',
                             scrollTrigger: { trigger: sectionRef.current, start: 'top 90%', end: pinned ? 'top top' : 'top 25%', scrub: 0.6 },
                         }
@@ -206,16 +207,16 @@ export function AboutSummaryV2() {
                 <div
                     className="container-unified relative grid grid-cols-1 lg:grid-cols-12 items-center"
                     style={{
-                        gap: 'clamp(2rem, 1rem + 3vw, 4.5rem)',
-                        paddingTop: 'clamp(4rem, 3rem + 4vh, 7rem)',
-                        paddingBottom: 'clamp(4rem, 3rem + 4vh, 7rem)',
+                        gap: 'clamp(2rem, 1rem + 3vw, 4rem)',
+                        paddingTop: 'clamp(4rem, 2rem + 4vh, 5.5rem)',
+                        paddingBottom: 'clamp(4rem, 2rem + 4vh, 5.5rem)',
                     }}
                 >
                     {/* ── الصورة ── */}
-                    <div className="lg:col-span-5 w-full max-w-md sm:max-w-lg lg:max-w-none mx-auto">
+                    <div className="lg:col-span-6 w-full sm:max-w-xl lg:max-w-none mx-auto">
                         <div
                             data-about-image
-                            className="relative w-full aspect-[4/5] lg:max-h-[72svh] overflow-hidden rounded-3xl shadow-2xl"
+                            className="relative w-full aspect-[4/5] lg:aspect-auto lg:h-[min(86svh,56rem)] overflow-hidden rounded-[2rem] shadow-2xl"
                             style={{ backgroundColor: 'var(--card)' }}
                         >
                             <div data-about-image-inner className="absolute inset-0 will-change-transform">
@@ -223,7 +224,7 @@ export function AboutSummaryV2() {
                                     src="/me/2.jpeg"
                                     alt={personalInfo.name}
                                     fill
-                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 512px, 40vw"
+                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 576px, 50vw"
                                     className="object-cover object-top"
                                     priority
                                 />
@@ -235,7 +236,7 @@ export function AboutSummaryV2() {
 
                             {/* بطاقة الاسم فوق الصورة */}
                             <div
-                                className="absolute bottom-4 inset-x-4 sm:bottom-5 sm:inset-x-5 flex items-center justify-between gap-3 rounded-2xl border px-4 py-3 backdrop-blur-md"
+                                className="absolute bottom-4 inset-x-4 sm:bottom-5 sm:inset-x-5 rounded-2xl border px-4 py-3 backdrop-blur-md"
                                 style={{ backgroundColor: 'rgba(10,10,12,0.55)', borderColor: 'rgba(255,255,255,0.08)' }}
                             >
                                 <div className="min-w-0">
@@ -246,24 +247,12 @@ export function AboutSummaryV2() {
                                         {personalInfo.title}
                                     </p>
                                 </div>
-                                {personalInfo.available && (
-                                    <span
-                                        className="shrink-0 inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium"
-                                        style={{ backgroundColor: 'rgba(34,197,94,0.12)', color: 'rgb(134,239,172)' }}
-                                    >
-                                        <span className="relative flex w-1.5 h-1.5">
-                                            <span className="absolute inset-0 rounded-full animate-ping bg-green-400 opacity-75" />
-                                            <span className="relative w-1.5 h-1.5 rounded-full bg-green-400" />
-                                        </span>
-                                        {language === 'ar' ? 'متاح' : 'Available'}
-                                    </span>
-                                )}
                             </div>
                         </div>
                     </div>
 
                     {/* ── النص ── */}
-                    <div className="lg:col-span-7 flex flex-col min-w-0">
+                    <div className="lg:col-span-6 flex flex-col min-w-0">
                         <p
                             data-fade-up
                             className="inline-flex items-center gap-2 text-xs sm:text-sm mb-4"
@@ -319,35 +308,47 @@ export function AboutSummaryV2() {
                             ))}
                         </ul>
 
-                        {/* الإحصائيات */}
+                        {/* لوحة الأدوات المتحركة + الإحصائيات */}
                         <div
-                            data-stats
                             data-fade-up
-                            className="grid grid-cols-2 sm:grid-cols-4 mt-8 lg:mt-10 rounded-2xl overflow-hidden gap-px"
-                            style={{ backgroundColor: 'color-mix(in srgb, var(--foreground) 10%, transparent)' }}
+                            className="mt-8 lg:mt-10 rounded-3xl border overflow-hidden"
+                            style={{
+                                borderColor: 'color-mix(in srgb, var(--foreground) 10%, transparent)',
+                                background: 'linear-gradient(to bottom, color-mix(in srgb, var(--foreground) 3%, transparent), #050506)',
+                            }}
                         >
-                            {stats.map((stat) => (
-                                <div
-                                    key={stat.label}
-                                    className="flex flex-col items-center justify-center text-center gap-1 px-2 py-4 sm:py-5"
-                                    style={{ backgroundColor: '#050506' }}
-                                >
-                                    <span
-                                        data-count={stat.value}
-                                        className="tracking-tight font-bold tabular-nums"
-                                        style={{
-                                            color: 'var(--foreground)',
-                                            fontFamily: "Georgia, 'Times New Roman', serif",
-                                            fontSize: 'clamp(1.5rem, 1.1rem + 1.2vw, 2.25rem)',
-                                        }}
+                            <AnimatedFrameworks compact />
+                            <div
+                                data-stats
+                                className="grid grid-cols-2 sm:grid-cols-4 gap-px border-t"
+                                style={{
+                                    backgroundColor: 'color-mix(in srgb, var(--foreground) 10%, transparent)',
+                                    borderColor: 'color-mix(in srgb, var(--foreground) 10%, transparent)',
+                                }}
+                            >
+                                {stats.map((stat) => (
+                                    <div
+                                        key={stat.label}
+                                        className="flex flex-col items-center justify-center text-center gap-1 px-2 py-4 sm:py-5"
+                                        style={{ backgroundColor: '#050506' }}
                                     >
-                                        +{stat.value}
-                                    </span>
-                                    <span className="text-[11px] sm:text-xs font-medium" style={{ color: 'var(--muted-foreground)' }}>
-                                        {stat.label}
-                                    </span>
-                                </div>
-                            ))}
+                                        <span
+                                            data-count={stat.value}
+                                            className="tracking-tight font-bold tabular-nums"
+                                            style={{
+                                                color: 'var(--foreground)',
+                                                fontFamily: "Georgia, 'Times New Roman', serif",
+                                                fontSize: 'clamp(1.5rem, 1.1rem + 1.2vw, 2.25rem)',
+                                            }}
+                                        >
+                                            +{stat.value}
+                                        </span>
+                                        <span className="text-[11px] sm:text-xs font-medium" style={{ color: 'var(--muted-foreground)' }}>
+                                            {stat.label}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>

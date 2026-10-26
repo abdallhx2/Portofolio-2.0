@@ -335,6 +335,12 @@ body {
   letter-spacing: -0.02em;
 }
 
+/* مؤشر التشغيل التلقائي في قسم الأعمال المميزة */
+@keyframes fp-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
 .hero-morph {
   height: clamp(5.5rem, 1rem + 15vw, 13rem);
 }

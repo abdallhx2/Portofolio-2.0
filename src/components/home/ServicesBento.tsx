@@ -39,43 +39,43 @@ import { cn } from '@/lib/utils';
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 /* ─── بيانات الخدمات ─── */
-type ServiceId = 'ai-agents' | 'web-mobile' | 'rag' | 'voice';
+type ServiceId = 'ai-apps' | 'automation' | 'knowledge' | 'voice' | 'web-mobile';
 
 const BENTO_SERVICES: Record<ServiceId, { en: { title: string; description: string }; ar: { title: string; description: string } }> = {
-  'ai-agents': {
+  'ai-apps': {
     en: {
-      title: 'AI Agents & Automation',
+      title: 'AI-Powered Applications',
       description:
-        'Designing intelligent agent architectures, LLM orchestration, and autonomous workflows that connect your tools — they think, decide, and act.',
+        'Products with generative AI at their core — LLM integration, smart search, summarization, classification, and content generation built right into your app.',
     },
     ar: {
-      title: 'وكلاء الذكاء الاصطناعي والأتمتة',
+      title: 'تطبيقات مدعومة بالذكاء الاصطناعي',
       description:
-        'تصميم بنى وكلاء ذكية وتنسيق النماذج اللغوية وسير عمل مستقل يربط أدواتك ببعض — يفكر ويقرر وينفذ.',
+        'منتجات يكون الذكاء التوليدي في قلبها — دمج النماذج اللغوية، بحث ذكي، تلخيص وتصنيف وتوليد محتوى مبني داخل تطبيقك.',
     },
   },
-  'web-mobile': {
+  automation: {
     en: {
-      title: 'Web & Mobile Development',
+      title: 'AI Agents & Workflow Automation',
       description:
-        'Full-stack Next.js platforms and cross-platform Flutter apps — one codebase mindset, responsive UI, and performance-first architecture.',
+        'Autonomous agents that connect your tools — WhatsApp, Slack, Notion, databases — and run multi-step tasks end to end, without manual work.',
     },
     ar: {
-      title: 'تطوير الويب والجوال',
+      title: 'وكلاء الذكاء الاصطناعي وأتمتة المهام',
       description:
-        'منصات Full-stack بـ Next.js وتطبيقات Flutter متعددة المنصات — واجهات متجاوبة وبنية تضع الأداء أولاً.',
+        'وكلاء مستقلون يربطون أدواتك ببعض — واتساب وسلاك ونوشن وقواعد البيانات — وينفذون المهام متعددة الخطوات من البداية للنهاية بدون تدخل يدوي.',
     },
   },
-  rag: {
+  knowledge: {
     en: {
-      title: 'LLM Apps & Knowledge Assistants',
+      title: 'Knowledge Base & RAG Systems',
       description:
-        'RAG-powered assistants that answer from your own documents and data — accurate, cited, and integrated into your product.',
+        'Turn your documents and data into an assistant that answers accurately with cited sources — for your team or your customers.',
     },
     ar: {
-      title: 'تطبيقات LLM ومساعدات المعرفة',
+      title: 'قواعد المعرفة وأنظمة RAG',
       description:
-        'مساعدات مبنية على RAG تجاوب من مستنداتك وبياناتك الخاصة — بدقة ومع ذكر المصدر، ومدمجة داخل منتجك.',
+        'حوّل مستنداتك وبياناتك إلى مساعد يجاوب بدقة مع ذكر المصدر — لفريقك أو لعملائك.',
     },
   },
   voice: {
@@ -85,9 +85,21 @@ const BENTO_SERVICES: Record<ServiceId, { en: { title: string; description: stri
         'Real-time voice and chat agents that understand Arabic & English, take actions through your systems, and serve customers 24/7.',
     },
     ar: {
-      title: 'الذكاء الاصطناعي الصوتي والمحادثة',
+      title: 'الذكاء الاصطناعي الصوتي ووكلاء المحادثة',
       description:
         'وكلاء صوت ومحادثة لحظيين يفهمون العربية والإنجليزية، ينفذون مهام عبر أنظمتك، ويخدمون عملاءك على مدار الساعة.',
+    },
+  },
+  'web-mobile': {
+    en: {
+      title: 'Web & Mobile Development',
+      description:
+        'Full-stack Next.js platforms and cross-platform Flutter apps — responsive UI and performance-first architecture.',
+    },
+    ar: {
+      title: 'تطوير الويب والجوال',
+      description:
+        'منصات Full-stack بـ Next.js وتطبيقات Flutter متعددة المنصات — واجهات متجاوبة وبنية تضع الأداء أولاً.',
     },
   },
 };
@@ -315,6 +327,95 @@ function RagChatDemo({ language, isRTL }: { language: 'en' | 'ar'; isRTL: boolea
   );
 }
 
+/* ─── تطبيق ذكي: نص يدخل ← تحليل ← نتائج منظمة ─── */
+const APPS_COPY = {
+  en: {
+    label: 'Customer review',
+    text: 'The app is fast and the delivery arrived early, but I wish there were more payment options.',
+    analyzing: 'Analyzing with AI…',
+    outputs: [
+      { k: 'Sentiment', v: 'Positive · 82%' },
+      { k: 'Topics', v: 'Delivery, Payments' },
+      { k: 'Action', v: 'Suggest Apple Pay' },
+    ],
+  },
+  ar: {
+    label: 'تقييم عميل',
+    text: 'التطبيق سريع والتوصيل وصل بدري، بس أتمنى يكون فيه طرق دفع أكثر.',
+    analyzing: 'جاري التحليل بالذكاء الاصطناعي…',
+    outputs: [
+      { k: 'الانطباع', v: 'إيجابي · ٨٢٪' },
+      { k: 'المواضيع', v: 'التوصيل، الدفع' },
+      { k: 'الإجراء', v: 'اقتراح Apple Pay' },
+    ],
+  },
+};
+
+function AIAppsDemo({ language, isRTL }: { language: 'en' | 'ar'; isRTL: boolean }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const copy = APPS_COPY[language];
+
+  useGSAP(
+    () => {
+      const q = gsap.utils.selector(ref);
+      const tl = gsap.timeline({ repeat: -1, repeatDelay: 1.8, paused: true });
+      tl.set(q('[data-out]'), { opacity: 0, y: 10 })
+        .set(q('[data-scan]'), { yPercent: -100, opacity: 0 })
+        .set(q('[data-analyzing]'), { opacity: 0 })
+        .to(q('[data-analyzing]'), { opacity: 1, duration: 0.3 })
+        .to(q('[data-scan]'), { opacity: 1, duration: 0.2 }, '<')
+        .to(q('[data-scan]'), { yPercent: 100, duration: 1.3, ease: 'power1.inOut' }, '<')
+        .to(q('[data-scan]'), { opacity: 0, duration: 0.2 })
+        .to(q('[data-analyzing]'), { opacity: 0, duration: 0.2 }, '<')
+        .to(q('[data-out]'), { opacity: 1, y: 0, duration: 0.4, stagger: 0.18, ease: 'back.out(1.8)' })
+        .to({}, { duration: 2 });
+      playWhileVisible(tl, ref.current);
+    },
+    { scope: ref, dependencies: [language], revertOnUpdate: true }
+  );
+
+  return (
+    <div ref={ref} className="flex h-full w-full flex-col justify-center gap-2.5 px-5 pt-5" dir={isRTL ? 'rtl' : 'ltr'}>
+      <div
+        className="relative overflow-hidden rounded-2xl border px-3.5 py-3"
+        style={{ borderColor: 'var(--border)', backgroundColor: 'var(--card)' }}
+      >
+        <span className="block text-[10px] font-semibold uppercase tracking-wider mb-1" style={{ color: 'var(--muted-foreground)' }}>
+          {copy.label}
+        </span>
+        <p className="text-[13px] leading-relaxed" style={{ color: 'var(--foreground)' }}>
+          {copy.text}
+        </p>
+        {/* خط المسح */}
+        <span
+          data-scan
+          className="pointer-events-none absolute inset-x-0 top-0 h-full"
+          style={{ background: 'linear-gradient(to bottom, transparent 40%, color-mix(in srgb, var(--primary) 35%, transparent) 50%, transparent 60%)' }}
+        />
+      </div>
+
+      <span data-analyzing className="inline-flex items-center gap-1.5 text-[11px] min-h-4" style={{ color: 'var(--muted-foreground)' }}>
+        <Sparkles className="w-3.5 h-3.5 animate-pulse" style={{ color: 'var(--primary)' }} />
+        {copy.analyzing}
+      </span>
+
+      <div className="grid grid-cols-1 gap-1.5">
+        {copy.outputs.map((o) => (
+          <div
+            key={o.k}
+            data-out
+            className="flex items-center justify-between gap-2 rounded-xl px-3 py-1.5 text-[12px]"
+            style={{ backgroundColor: 'color-mix(in srgb, var(--primary) 12%, transparent)' }}
+          >
+            <span style={{ color: 'var(--muted-foreground)' }}>{o.k}</span>
+            <span className="font-semibold" style={{ color: 'var(--foreground)' }}>{o.v}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ─── وكيل صوتي: موجة صوت + نص المحادثة + تنفيذ مهمة ─── */
 const VOICE_COPY = {
   en: {
@@ -437,17 +538,20 @@ function BentoCard({
   children,
   className = '',
   isRTL,
+  horizontal = false,
 }: {
   title: string;
   description: string;
   children: React.ReactNode;
   className?: string;
   isRTL: boolean;
+  /** بطاقة عريضة: المحتوى بجانب النص في الشاشات الكبيرة */
+  horizontal?: boolean;
 }) {
   return (
     <div
       data-bento-card
-      className={`group flex flex-col backdrop-blur-xl overflow-hidden ${className}`}
+      className={`group flex flex-col ${horizontal ? 'lg:flex-row-reverse' : ''} backdrop-blur-xl overflow-hidden ${className}`}
       style={{ backgroundColor: 'color-mix(in srgb, var(--background) 35%, transparent)' }}
     >
       {/* المكون التفاعلي */}
@@ -457,7 +561,7 @@ function BentoCard({
 
       {/* النص */}
       <div
-        className={`${isRTL ? 'text-right' : 'text-left'}`}
+        className={`${isRTL ? 'text-right' : 'text-left'} ${horizontal ? 'lg:w-[38%] lg:flex lg:flex-col lg:justify-center lg:px-12' : ''}`}
         style={{ padding: 'clamp(1.25rem, 1rem + 0.5vw, 1.5rem)' }}
         dir={isRTL ? 'rtl' : 'ltr'}
       >
@@ -537,22 +641,53 @@ export function ServicesBento() {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[4px] rounded-2xl overflow-hidden"
             style={{ backgroundColor: 'color-mix(in srgb, var(--foreground) 15%, transparent)' }}
           >
-            {/* 1. AI Agents & Automation — عريض */}
+            {/* 1. Agents & Automation — عريض */}
             <BentoCard
-              title={svc('ai-agents').title}
-              description={svc('ai-agents').description}
+              title={svc('automation').title}
+              description={svc('automation').description}
               className={`md:col-span-2 ${cardHeight}`}
               isRTL={isRTL}
             >
               <AIBeamDemo />
             </BentoCard>
 
-            {/* 2. Web & Mobile — مدمج */}
+            {/* 2. Knowledge Base & RAG */}
+            <BentoCard
+              title={svc('knowledge').title}
+              description={svc('knowledge').description}
+              className={cardHeight}
+              isRTL={isRTL}
+            >
+              <RagChatDemo language={language} isRTL={isRTL} />
+            </BentoCard>
+
+            {/* 3. AI-Powered Apps */}
+            <BentoCard
+              title={svc('ai-apps').title}
+              description={svc('ai-apps').description}
+              className={cardHeight}
+              isRTL={isRTL}
+            >
+              <AIAppsDemo language={language} isRTL={isRTL} />
+            </BentoCard>
+
+            {/* 4. Voice AI — عريض */}
+            <BentoCard
+              title={svc('voice').title}
+              description={svc('voice').description}
+              className={`md:col-span-2 ${cardHeight}`}
+              isRTL={isRTL}
+            >
+              <VoiceAgentDemo language={language} isRTL={isRTL} />
+            </BentoCard>
+
+            {/* 5. Web & Mobile — بعرض كامل */}
             <BentoCard
               title={svc('web-mobile').title}
               description={svc('web-mobile').description}
-              className={cardHeight}
+              className="md:col-span-2 lg:col-span-3 min-h-[360px] sm:min-h-0 sm:h-[370px] lg:h-[340px]"
               isRTL={isRTL}
+              horizontal
             >
               <div className="absolute inset-0 flex items-center justify-center overflow-hidden" dir="ltr">
                 <div className="scale-[0.72] sm:scale-[0.8] lg:scale-90">
@@ -565,26 +700,6 @@ export function ServicesBento() {
                   />
                 </div>
               </div>
-            </BentoCard>
-
-            {/* 3. LLM Apps & RAG */}
-            <BentoCard
-              title={svc('rag').title}
-              description={svc('rag').description}
-              className={cardHeight}
-              isRTL={isRTL}
-            >
-              <RagChatDemo language={language} isRTL={isRTL} />
-            </BentoCard>
-
-            {/* 4. Voice AI — عريض */}
-            <BentoCard
-              title={svc('voice').title}
-              description={svc('voice').description}
-              className={`md:col-span-2 ${cardHeight}`}
-              isRTL={isRTL}
-            >
-              <VoiceAgentDemo language={language} isRTL={isRTL} />
             </BentoCard>
           </div>
         </div>

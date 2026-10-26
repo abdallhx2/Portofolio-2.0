@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils"
 
 const FRAMEWORK_PATH = "M 1 0 v 5 q 0 5 5 5 h 39 q 5 0 5 5 v 71 q 0 5 5 5 h 39 q 5 0 5 5 v 5"
 
-const AnimatedFrameworks = () => {
+const AnimatedFrameworks = ({ compact = false }: { compact?: boolean }) => {
   const [nextJsTransform, setNextJsTransform] = useState("none")
   const [reactTransform, setReactTransform] = useState("none")
   const [htmlTransform, setHtmlTransform] = useState("none")
@@ -91,7 +91,7 @@ const AnimatedFrameworks = () => {
   const cardClasses =
     "flex aspect-square items-center justify-center rounded-md border p-1.5 [@media(min-width:500px)]:p-3 lg:p-4 " +
     "shadow-[0_8px_30px_rgb(0,0,0,0.12)] " +
-    "h-12 [@media(min-width:500px)]:h-20 lg:h-36 " +
+    (compact ? "h-14 sm:h-20 lg:h-24 " : "h-12 [@media(min-width:500px)]:h-20 lg:h-36 ") +
     "transition-transform duration-1000 ease-out will-change-transform"
 
   return (
@@ -100,7 +100,7 @@ const AnimatedFrameworks = () => {
       className={cn(
         "relative",
         "flex flex-col items-center justify-center gap-1",
-        "h-[7rem] sm:h-[10rem] lg:h-[19rem] w-full"
+        compact ? "h-[8.5rem] sm:h-[10rem] lg:h-[11.5rem] w-full" : "h-[7rem] sm:h-[10rem] lg:h-[19rem] w-full"
       )}
     >
       {/* SVG S-curve path with animated beam */}
@@ -197,12 +197,12 @@ const AnimatedFrameworks = () => {
       </div>
 
       {/* Bottom fade */}
-      <div
+      {!compact && <div
         className="absolute bottom-0 left-0 h-3 w-full"
         style={{
           background: 'linear-gradient(to top, var(--card), transparent)',
         }}
-      />
+      />}
     </div>
   )
 }
