@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Marhey } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -23,20 +23,40 @@ const marhey = Marhey({
 });
 
 
+const siteDescription =
+  "Abdullah Nasser — software developer and IT project manager building apps, AI agents and automation.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://an1.space"),
   title: "Abdullah Space",
-  description: "",
-  authors: [{ name: "Abdullah" }],
+  description: siteDescription,
+  authors: [{ name: "Abdullah Nasser" }],
+  manifest: "/site.webmanifest",
   icons: {
-    icon: "/logo.png",
-    shortcut: "/logo.png",
-    apple: "/logo.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
   openGraph: {
     title: "Abdullah Space",
-    description: "",
+    description: siteDescription,
     type: "website",
+    url: "/",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Abdullah Nasser" }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Abdullah Space",
+    description: siteDescription,
+    images: ["/og-image.png"],
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0B0820",
 };
 
 export default function RootLayout({

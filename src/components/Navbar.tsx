@@ -7,6 +7,7 @@ import { motion } from 'motion/react';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
 import { useLanguage } from '@/context/LanguageContext';
+import BrandMark from '@/components/BrandMark';
 
 const getNavigationItems = (t: (key: string) => string) => [
   { href: '/', label: t('nav.home') },
@@ -70,8 +71,11 @@ export default function Navbar() {
             borderColor: 'var(--border)',
           }}
         >
-          {/* Nav Links */}
+          {/* Brand + Nav Links */}
           <div className="flex items-center gap-6">
+            <Link href="/" aria-label="Abdullah Nasser — home" className="flex items-center transition-transform hover:scale-110">
+              <BrandMark className="w-8 h-8" />
+            </Link>
             {navigationItems.map((item) => (
               <Link
                 key={item.href}
@@ -149,8 +153,11 @@ export default function Navbar() {
             borderColor: 'var(--border)',
           }}
         >
-          {/* Nav Links as text */}
+          {/* Brand + Nav Links as text */}
           <div className="flex items-center gap-3">
+            <Link href="/" aria-label="Abdullah Nasser — home" className="flex items-center">
+              <BrandMark className="w-7 h-7" />
+            </Link>
             {navigationItems.map((item) => (
               <Link
                 key={item.href}

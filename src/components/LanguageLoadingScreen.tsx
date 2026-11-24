@@ -1,6 +1,7 @@
 'use client';
 
 import { useLanguage } from '@/context/LanguageContext';
+import BrandMark from '@/components/BrandMark';
 
 export default function LanguageLoadingScreen() {
   const { isLanguageChanging, language } = useLanguage();
@@ -19,8 +20,9 @@ export default function LanguageLoadingScreen() {
           border: '1px solid var(--border)',
         }}
       >
-        {/* Spinner */}
-        <div className="relative w-10 h-10">
+        {/* Spinner around the brand mark */}
+        <div className="relative w-14 h-14">
+          <BrandMark className="absolute inset-3 w-8 h-8" />
           <div
             className="absolute inset-0 rounded-full border-[3px] border-t-transparent animate-spin"
             style={{ borderColor: 'var(--border)', borderTopColor: 'transparent' }}
