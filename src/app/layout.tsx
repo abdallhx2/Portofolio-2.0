@@ -28,30 +28,30 @@ const siteDescription =
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://an1.space"),
-  title: "Abdullah Space",
+  title: "Abdullah Nasser",
   description: siteDescription,
   authors: [{ name: "Abdullah Nasser" }],
   manifest: "/site.webmanifest",
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico?v=2", sizes: "any" },
+      { url: "/icon.svg?v=2", type: "image/svg+xml" },
     ],
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    shortcut: "/favicon.ico?v=2",
+    apple: "/apple-touch-icon.png?v=2",
   },
   openGraph: {
-    title: "Abdullah Space",
+    title: "Abdullah Nasser",
     description: siteDescription,
     type: "website",
     url: "/",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Abdullah Nasser" }],
+    images: [{ url: "/og-an.png", width: 1200, height: 630, alt: "Abdullah Nasser" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Abdullah Space",
+    title: "Abdullah Nasser",
     description: siteDescription,
-    images: ["/og-image.png"],
+    images: ["/og-an.png"],
   },
 };
 

@@ -51,7 +51,7 @@ export const projects: Project[] = [
     technologies: ["Flutter", "Dart", "Firebase"],
     testimonial: {
       text: "Exactly what I needed — intuitive and smooth.",
-      author: "Abdullah",
+      author: "Abdullah Nasser",
       role: "Developer",
       company: "Personal"
     }
@@ -108,7 +108,7 @@ export const projects: Project[] = [
     technologies: ["Flutter", "OpenAI API", "Dart"],
     testimonial: {
       text: "Solves a real dev pain — super useful.",
-      author: "Abdullah",
+      author: "Abdullah Nasser",
       role: "Creator",
       company: "Raseem"
     }

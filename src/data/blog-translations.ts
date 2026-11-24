@@ -209,7 +209,7 @@ And once you master that, the AI doesn't just follow instructions — it becomes
 ---
 
 *Ready to dive deeper into context engineering? Start by auditing your current AI implementations and identifying opportunities to add structured context. The transformation in AI capability will surprise you.*`,
-      author: "Abdullah Alhasani",
+      author: "Abdullah Nasser",
       publishedAt: "2024-07-15",
       category: "AI & Innovation",
       tags: ["AI", "Context Engineering", "Prompting", "Technology"],
@@ -384,7 +384,7 @@ const contextualAI = {
 ---
 
 *مستعد تتعمق أكثر في هندسة السياق؟ ابدأ بمراجعة تطبيقات الذكاء الاصطناعي الحالية وحدد الفرص لإضافة سياق منظم. التحول في قدرة الذكاء الاصطناعي راح يفاجئك.*`,
-      author: "عبدالله الحسني",
+      author: "عبدالله ناصر",
       publishedAt: "2024-07-15",
       category: "الذكاء الاصطناعي",
       tags: ["الذكاء الاصطناعي", "هندسة السياق", "التلقين", "التقنية"],

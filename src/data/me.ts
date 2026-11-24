@@ -75,7 +75,7 @@ export interface Statistics {
 }
 
 export const personalInfo: PersonalInfo = {
-  name: "Abdullah Nasser Alhasani",
+  name: "Abdullah Nasser",
   title: "Application Developer & IT Project Manager",
   bio: "Innovative Software Developer and IT Professional with 7+ years of experience in application development and IT project management. Proven expertise in developing web and mobile applications using cutting-edge technologies and frameworks. Strong background in technical project management and team leadership, with a track record of delivering innovative solutions that drive business value.",
   shortBio: "Application Developer & IT Project Manager specializing in web and mobile development with expertise in Flutter, Next.js, and AI-powered solutions.",

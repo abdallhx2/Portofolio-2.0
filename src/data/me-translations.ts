@@ -90,9 +90,9 @@ export interface FAQTranslation {
 
 export const personalInfoTranslations: Record<Language, PersonalInfoTranslation> = {
   en: {
-    name: "Abdullah Alsharif",
+    name: "Abdullah Nasser",
     title: "Software Engineer",
-    bioParagraph1: "Abdullah Alsharif, a Software Engineer and Technical Consultant specializing in full-stack web and mobile application development, with a growing focus on Artificial Intelligence and Large Language Models. My journey started with curiosity about technology and evolved into a career building applications and systems, from managing critical IT infrastructures to developing custom AI agents.",
+    bioParagraph1: "Abdullah Nasser, a Software Engineer and Technical Consultant specializing in full-stack web and mobile application development, with a growing focus on Artificial Intelligence and Large Language Models. My journey started with curiosity about technology and evolved into a career building applications and systems, from managing critical IT infrastructures to developing custom AI agents.",
     bioParagraph2: "My work is defined by precision and a forward-thinking mindset. I strive to bridge the gap between technical complexity and seamless user experience. I believe the future belongs to those who harness AI effectively, and my mission is to build the tools that make that future a reality.",
     bioParagraph3: "From managing critical IT infrastructures to developing custom AI agents, my work is defined by precision and a forward-thinking mindset. I bridge the gap between technical complexity and user-centric design.",
     bioParagraph4: "I believe that the future belongs to those who can harness the power of AI to elevate human potential. My mission is to build the tools that make that future a reality.",
@@ -110,9 +110,9 @@ export const personalInfoTranslations: Record<Language, PersonalInfoTranslation>
     }
   },
   ar: {
-    name: "عبدالله الشريف",
+    name: "عبدالله ناصر",
     title: "مهندس برمجيات",
-    bioParagraph1: "عبدالله الشريف، مهندس برمجيات ومستشار تقني متخصص في هندسة تطبيقات الويب والهاتف المحمول المتكاملة، مع تركيز متزايد على الذكاء الاصطناعي والنماذج اللغوية الكبيرة. بدأت رحلتي بفضول تجاه التقنية وتطورت إلى مسيرة مهنية في بناء التطبيقات والأنظمة، من إدارة البنى التحتية الحساسة إلى تطوير وكلاء ذكاء اصطناعي مخصصين.",
+    bioParagraph1: "عبدالله ناصر، مهندس برمجيات ومستشار تقني متخصص في هندسة تطبيقات الويب والهاتف المحمول المتكاملة، مع تركيز متزايد على الذكاء الاصطناعي والنماذج اللغوية الكبيرة. بدأت رحلتي بفضول تجاه التقنية وتطورت إلى مسيرة مهنية في بناء التطبيقات والأنظمة، من إدارة البنى التحتية الحساسة إلى تطوير وكلاء ذكاء اصطناعي مخصصين.",
     bioParagraph2: "يتسم عملي بالدقة والنظرة المستقبلية، وأسعى دائماً لردم الفجوة بين التعقيد التقني وتجربة المستخدم السلسة. أؤمن أن المستقبل لمن يحسن توظيف الذكاء الاصطناعي، ومهمتي هي بناء الأدوات التي تجعل هذا المستقبل واقعاً ملموساً.",
     bioParagraph3: "من إدارة البنى التحتية التقنية الحساسة إلى تطوير وكلاء ذكاء اصطناعي مخصصين، يتسم عملي بالدقة والنظرة المستقبلية. أعمل على ردم الفجوة بين التعقيد التقني وتجربة المستخدم السلسة.",
     bioParagraph4: "أؤمن أن المستقبل لمن يطوع الذكاء الاصطناعي لرفع القدرات البشرية. مهمتي هي بناء الأدوات التي تجعل هذا المستقبل واقعاً ملموساً.",
